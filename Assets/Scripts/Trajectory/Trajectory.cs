@@ -1,18 +1,21 @@
-using Unity.AI.Navigation;
 using UnityEngine;
 
 [ExecuteInEditMode]
 public class Trajectory : MonoBehaviour
 {
-    [SerializeField]
-    private Spline _splineVisualization;
-    [SerializeField] Vector3 _startPoint, _endPoint;
-    [SerializeField, Min(0.01f)]
-    private float _heightOffset = 1;
-    [SerializeField, Range(0.25f, 0.75f)]
-    private float _placementOffset = 0.5f;
+    [SerializeField] TrajectoryType type;
 
-# if UNITY_EDITOR
+    [SerializeField] private Spline _splineVisualization;
+    [SerializeField] public Vector3 _startPoint, _endPoint;
+    [SerializeField, Min(0.01f)] private float _heightOffset = 1;
+    [SerializeField, Range(0.25f, 0.75f)] private float _placementOffset = 0.5f;
+
+    public Spline Spline { get => _splineVisualization;}
+
+    public TrajectoryType Type { get => type; }
+
+
+#if UNITY_EDITOR
 
     private void Update()
     {
