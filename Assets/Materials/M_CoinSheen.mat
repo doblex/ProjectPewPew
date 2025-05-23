@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Coin Sheen
+  m_Name: M_CoinSheen
   m_Shader: {fileID: -6465566751694194690, guid: d5ddd2675e2c2244895036a9dc14fd69, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
