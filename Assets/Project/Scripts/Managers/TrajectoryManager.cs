@@ -34,8 +34,9 @@ public class TrajectoryManager : MonoBehaviour
         shootingPlayer.onPlayerShoot += OnShoot;
         throwingPlayer.onPlayerThrow += OnThrow;
         currentCoinTrowed = Instantiate(coin.gameObject, trajectory._startPoint, Quaternion.identity).GetComponent<Coin>();
-
+        TurnManager.Instance.TurnPhase = TurnPhase.PassiveThrow;
         throwingPlayer.CanTrow = true;
+        shootingPlayer.CanShoot = true;
         isHit = false;
     }
 
@@ -45,6 +46,7 @@ public class TrajectoryManager : MonoBehaviour
         p.CanTrow = false;
 
         StartCoroutine(MoveOnTrajectory(trajectory.Spline));
+        TurnManager.Instance.TurnPhase = TurnPhase.ActiveQuickTimeEvent;
     }
 
     void OnShoot(PG p)
@@ -55,6 +57,7 @@ public class TrajectoryManager : MonoBehaviour
             currentCoinTrowed.Hit();
             isHit = true;
         }
+        p.CanShoot = false;
     }
 
     private IEnumerator MoveOnTrajectory(Spline spline)
@@ -75,6 +78,7 @@ public class TrajectoryManager : MonoBehaviour
         }
 
         currentCoinTrowed.transform.position = trajectory._endPoint;
+        Destroy(currentCoinTrowed.gameObject);
         onThrowEnded?.Invoke(isHit);
     }
 

@@ -4,6 +4,11 @@ public class AI : PG
 {
     float coinTimer = 0;
 
+    public AI ()
+    {
+        playerType = PlayerType.AI;
+    }
+
     public override int ChooseCoinDifficulty(Coin[] coins)
     {
         int index = Random.Range(0, coins.Length);
@@ -22,6 +27,11 @@ public class AI : PG
     public override Trajectory ChooseEnemyTrajectory(Trajectory[] trajectories)
     {
         return trajectories[Random.Range(0, trajectories.Length)];
+    }
+
+    protected override void CheckForShoot()
+    {
+        
     }
 
     protected override void CheckForThrow()

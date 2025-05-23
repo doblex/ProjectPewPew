@@ -17,14 +17,17 @@ public abstract class PG : MonoBehaviour
     [SerializeField] int points = 0;
 
     private bool canTrow;
+    private bool canShoot;
 
     public Trajectory[] Trajectories { get => trajectories;}
     public bool CanTrow { get => canTrow; set => canTrow = value; }
+    public bool CanShoot { get => canShoot; set => canShoot = value; }
     public int Points { get => points; }
 
-    protected void Update()
+    private void Update()
     {
         CheckForThrow();
+        CheckForShoot();
     }
 
     public void AwardPoints(int pointsAwarded)
@@ -37,5 +40,7 @@ public abstract class PG : MonoBehaviour
     public abstract Trajectory ChooseCoinTrajectory(Trajectory[] trajectories, out Item item);
     public abstract Trajectory ChooseEnemyTrajectory(Trajectory[] trajectories);
     protected abstract void CheckForThrow();
+    protected abstract void CheckForShoot();
     protected void Throw() { onPlayerThrow?.Invoke(this); }
+    protected void Shoot() { onPlayerShoot?.Invoke(this); }
 }

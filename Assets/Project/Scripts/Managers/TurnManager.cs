@@ -10,8 +10,11 @@ public class TurnManager : MonoBehaviour
     [SerializeField] PG[] players;
     [SerializeField] Coin[] throwableCoins;
 
+    [Header("Debug variables DONT TOUCH")]
+    public TurnPhase TurnPhase;
     [SerializeField] int currentActivePlayer = -1;
     [SerializeField] int currentSelectedCoin = -1;
+
     bool isThrowing = false;
 
     private int NextPlayerIndex => (currentActivePlayer + 1) % players.Length;
@@ -36,9 +39,10 @@ public class TurnManager : MonoBehaviour
 
     private void Update()
     {
-        if (currentActivePlayer != -1 && !isThrowing)
+        if (currentActivePlayer != -1 && TurnPhase == TurnPhase.NextPlayer)
         {
             isThrowing = true;
+            TurnPhase = TurnPhase.ActiveCoinSelection;
             SetCoin(players[currentActivePlayer].ChooseCoinDifficulty(throwableCoins));
             PrepareThrow();
         }
@@ -47,11 +51,14 @@ public class TurnManager : MonoBehaviour
     public void ChooseFirstPlayer()
     {
         //ThrowCoinAnimation
-        currentActivePlayer = Random.Range(0, players.Length);
+        //currentActivePlayer = Random.Range(0, players.Length);
+        currentActivePlayer = 1;
+        TurnPhase = TurnPhase.NextPlayer;
     }
 
     public void NextPlayer()
     {
+        TurnPhase = TurnPhase.NextPlayer;
         currentActivePlayer = NextPlayerIndex;
         currentSelectedCoin = -1;
         isThrowing = false;
@@ -93,12 +100,16 @@ public class TurnManager : MonoBehaviour
         Coin selectedCoin = throwableCoins[currentSelectedCoin];
         Trajectory[] validTrajectories = GetTrajectoriesByCoinDifficulty(players[NextPlayerIndex].Trajectories, selectedCoin.Type);
 
+        Debug.Log(validTrajectories.Length);
+
+        TurnPhase = TurnPhase.PassiveTrajectorySelection;
         Trajectory selectedTrajectory = 
             players[NextPlayerIndex].ChooseCoinTrajectory(
                 validTrajectories,
                 out Item itemUsed
                 );
 
+        TurnPhase = TurnPhase.ActiveTrajectorySelection;
         if (players[currentActivePlayer].ChooseEnemyTrajectory(validTrajectories) == selectedTrajectory)
         {
             TrajectoryManager.Instance.SpawnCoin(players[currentActivePlayer], players[NextPlayerIndex], selectedTrajectory, selectedCoin);
@@ -111,6 +122,9 @@ public class TurnManager : MonoBehaviour
 
     private void OnThrowEnded(bool hit)
     {
+        Debug.Log(hit);
+
+        TurnPhase = TurnPhase.ActivePointAssign;
         if(hit)
             players[currentActivePlayer].AwardPoints(throwableCoins[currentSelectedCoin].Points);
 
@@ -121,7 +135,7 @@ public class TurnManager : MonoBehaviour
 
     private void CheckForWinCondition()
     {
-
+        TurnPhase = TurnPhase.VictoryChecks;
         if (players[currentActivePlayer].Points >= pointsCap)
         {
             Debug.Log("WIN!!!!!");
