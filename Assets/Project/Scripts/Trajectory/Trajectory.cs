@@ -14,6 +14,7 @@ public class Trajectory : MonoBehaviour
 
     public TrajectoryType Type { get => type; }
 
+    public Vector3 Start { get => transform.TransformPoint(_startPoint); }
 
 #if UNITY_EDITOR
 

@@ -29,11 +29,6 @@ public class AI : PG
         return trajectories[Random.Range(0, trajectories.Length)];
     }
 
-    protected override void CheckForShoot()
-    {
-        
-    }
-
     protected override void CheckForThrow()
     {
         if (coinTimer <= 0 && CanTrow)
@@ -43,4 +38,17 @@ public class AI : PG
 
         coinTimer -= Time.deltaTime;
     }
+
+    public void AddShootEvent(TrajectoryManager trajectoryManager)
+    {
+        trajectoryManager.onAIShoot += Shoot;
+    }
+
+    public void RemoveShootEvent(TrajectoryManager trajectoryManager) 
+    {
+        trajectoryManager.onAIShoot -= Shoot;
+    }
+
+    protected override void CheckForShoot()
+    {}
 }

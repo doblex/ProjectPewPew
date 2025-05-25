@@ -12,7 +12,7 @@ public abstract class PG : MonoBehaviour
     public OnPlayerShoot onPlayerShoot;
     public OnPlayerPointsChanged onPlayerPointsChanged;
 
-    [SerializeField] protected PlayerType playerType;
+    [SerializeField] public PlayerType playerType;
     [SerializeField] protected Trajectory[] trajectories;
     [SerializeField] int points = 0;
 
@@ -42,5 +42,5 @@ public abstract class PG : MonoBehaviour
     protected abstract void CheckForThrow();
     protected abstract void CheckForShoot();
     protected void Throw() { onPlayerThrow?.Invoke(this); }
-    protected void Shoot() { onPlayerShoot?.Invoke(this); }
+    public void Shoot() { onPlayerShoot?.Invoke(this); }
 }

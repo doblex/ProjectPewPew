@@ -16,11 +16,13 @@ public class Coin : MonoBehaviour
 
     [Header("AI Options")]
     [SerializeField] float launchDelay = 0;
+    [SerializeField] float aIHitProbability;
 
     public float LaunchDelay { get => launchDelay; }
     public float ShineEnd { get => shineStart + duration; }
     public CoinType Type { get => type; }
     public int Points { get => points; }
+    public float AIHitProbability { get => aIHitProbability;}
 
     public void Start()
     {

@@ -414,6 +414,7 @@ MonoBehaviour:
   - {fileID: 5831713855840495492}
   points: 0
   ThrowKey: 101
+  ShootKey: 32
 --- !u!1001 &2252150047880767631
 PrefabInstance:
   m_ObjectHideFlags: 0

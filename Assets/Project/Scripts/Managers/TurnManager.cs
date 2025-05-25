@@ -100,7 +100,7 @@ public class TurnManager : MonoBehaviour
         Coin selectedCoin = throwableCoins[currentSelectedCoin];
         Trajectory[] validTrajectories = GetTrajectoriesByCoinDifficulty(players[NextPlayerIndex].Trajectories, selectedCoin.Type);
 
-        Debug.Log(validTrajectories.Length);
+        Debug.Log("Number of trajectories: " + validTrajectories.Length);
 
         TurnPhase = TurnPhase.PassiveTrajectorySelection;
         Trajectory selectedTrajectory = 
@@ -122,7 +122,7 @@ public class TurnManager : MonoBehaviour
 
     private void OnThrowEnded(bool hit)
     {
-        Debug.Log(hit);
+        Debug.Log("is Coin Hit? " + hit);
 
         TurnPhase = TurnPhase.ActivePointAssign;
         if(hit)
@@ -138,7 +138,7 @@ public class TurnManager : MonoBehaviour
         TurnPhase = TurnPhase.VictoryChecks;
         if (players[currentActivePlayer].Points >= pointsCap)
         {
-            Debug.Log("WIN!!!!!");
+            Debug.Log("SOMEONE WINs!!!!!");
         }
     }
 }
