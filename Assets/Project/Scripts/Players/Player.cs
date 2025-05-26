@@ -15,7 +15,6 @@ public class Player : PG
     public override int ChooseCoinDifficulty(Coin[] coins)
     {
         int index = -1;
-        //TODO Parte Grafica Monete
         index = 0;
         return index;
     }
@@ -24,7 +23,6 @@ public class Player : PG
     {
         int index = -1;
         itemIndex = -1;
-        //TODO Parte Grafica sia Item che traiettoria
         index = 0;
         return index;
     }
@@ -32,7 +30,6 @@ public class Player : PG
     public override int ChooseEnemyTrajectory(Trajectory[] trajectories)
     {
         int index = -1;
-        //TODO Parte Grafica Scelta traiettoria nemica
         index = 0;
         return index;
     }
