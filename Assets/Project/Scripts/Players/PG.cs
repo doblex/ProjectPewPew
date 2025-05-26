@@ -37,8 +37,8 @@ public abstract class PG : MonoBehaviour
     }
 
     public abstract int ChooseCoinDifficulty(Coin[] coins); //Selezione della difficoltà del round 
-    public abstract Trajectory ChooseCoinTrajectory(Trajectory[] trajectories, out Item item);
-    public abstract Trajectory ChooseEnemyTrajectory(Trajectory[] trajectories);
+    public abstract int ChooseCoinTrajectory(Trajectory[] trajectories, out int itemIndex);
+    public abstract int ChooseEnemyTrajectory(Trajectory[] trajectories);
     protected abstract void CheckForThrow();
     protected abstract void CheckForShoot();
     protected void Throw() { onPlayerThrow?.Invoke(this); }

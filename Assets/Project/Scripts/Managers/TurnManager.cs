@@ -5,10 +5,19 @@ public class TurnManager : MonoBehaviour
 {
     public static TurnManager Instance;
 
+    public delegate void OnPlayerChooseCoin(Coin[] coins);
+    public delegate void OnPlayerChooseCoinTrajectory(Trajectory[] trajectories,Item[] item);
+    public delegate void OnPlayerChooseEnemyTrajectory(Trajectory[] trajectories);
+
+    public OnPlayerChooseCoin onPlayerChooseCoin;
+    public OnPlayerChooseCoinTrajectory onPlayerChooseCoinTrajectory;
+    public OnPlayerChooseEnemyTrajectory onPlayerChooseEnemyTrajectory;
+
     [SerializeField] int pointsCap = 25;
 
     [SerializeField] PG[] players;
     [SerializeField] Coin[] throwableCoins;
+    [SerializeField] Item[] items;
 
     [Header("Debug variables DONT TOUCH")]
     public TurnPhase TurnPhase;
@@ -16,6 +25,7 @@ public class TurnManager : MonoBehaviour
     [SerializeField] int currentSelectedCoin = -1;
 
     bool isThrowing = false;
+    Trajectory[] validTrajectories;
 
     private int NextPlayerIndex => (currentActivePlayer + 1) % players.Length;
 
@@ -43,10 +53,24 @@ public class TurnManager : MonoBehaviour
         {
             isThrowing = true;
             TurnPhase = TurnPhase.ActiveCoinSelection;
-            SetCoin(players[currentActivePlayer].ChooseCoinDifficulty(throwableCoins));
-            PrepareThrow();
+            if (players[currentActivePlayer].playerType == PlayerType.PLAYER)
+            {
+                onPlayerChooseCoin?.Invoke(throwableCoins); //TODO Collegare Parte Grafica
+            }
+            else
+            {
+                SetCoin(players[currentActivePlayer].ChooseCoinDifficulty(throwableCoins));
+                PrepareThrow();
+            }
         }
     }
+
+    public void OnSetCoin(int index)
+    {
+        SetCoin(index);
+        PrepareThrow();
+    }
+
 
     public void ChooseFirstPlayer()
     {
@@ -98,23 +122,51 @@ public class TurnManager : MonoBehaviour
     public void PrepareThrow()
     {
         Coin selectedCoin = throwableCoins[currentSelectedCoin];
-        Trajectory[] validTrajectories = GetTrajectoriesByCoinDifficulty(players[NextPlayerIndex].Trajectories, selectedCoin.Type);
+        validTrajectories = GetTrajectoriesByCoinDifficulty(players[NextPlayerIndex].Trajectories, selectedCoin.Type);
 
         Debug.Log("Number of trajectories: " + validTrajectories.Length);
 
         TurnPhase = TurnPhase.PassiveTrajectorySelection;
-        Trajectory selectedTrajectory = 
-            players[NextPlayerIndex].ChooseCoinTrajectory(
-                validTrajectories,
-                out Item itemUsed
-                );
 
-        TurnPhase = TurnPhase.ActiveTrajectorySelection;
-        if (players[currentActivePlayer].ChooseEnemyTrajectory(validTrajectories) == selectedTrajectory)
+        if (players[NextPlayerIndex].playerType == PlayerType.PLAYER)
+        { 
+            onPlayerChooseCoinTrajectory?.Invoke(validTrajectories, items); //TODO Collegare Parte Grafica
+        }
+        else
         {
-            TrajectoryManager.Instance.SpawnCoin(players[currentActivePlayer], players[NextPlayerIndex], selectedTrajectory, selectedCoin);
+               int trajectoryIndex = players[NextPlayerIndex].ChooseCoinTrajectory(
+                    validTrajectories,
+                    out int itemIndex
+                    );
+
+            OnSetThrowingTrajectory(trajectoryIndex, itemIndex);
+        }
+    }
+
+    int gTrajectoryIndex = -1;
+
+    public void OnSetThrowingTrajectory(int trajectoryIndex, int itemIndex = -1)
+    {
+        gTrajectoryIndex = trajectoryIndex;
+        TurnPhase = TurnPhase.ActiveTrajectorySelection;
+
+        if (players[currentActivePlayer].playerType == PlayerType.PLAYER)
+        {
+            onPlayerChooseEnemyTrajectory?.Invoke(validTrajectories); //TODO Collegare Parte Grafica
         }
         else 
+        {
+            OnSetShootingTrajectory(players[currentActivePlayer].ChooseEnemyTrajectory(validTrajectories));
+        }
+    }
+
+    public void OnSetShootingTrajectory(int shootingTrajectoryIndex) 
+    {
+        if (validTrajectories[shootingTrajectoryIndex] == validTrajectories[gTrajectoryIndex])
+        {
+            TrajectoryManager.Instance.SpawnCoin(players[currentActivePlayer], players[NextPlayerIndex], validTrajectories[shootingTrajectoryIndex], throwableCoins[currentSelectedCoin]);
+        }
+        else
         {
             OnThrowEnded(false);
         }

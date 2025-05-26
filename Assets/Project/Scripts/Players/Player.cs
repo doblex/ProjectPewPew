@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEditor.Progress;
 
 
 public class Player : PG
@@ -19,21 +20,21 @@ public class Player : PG
         return index;
     }
 
-    public override Trajectory ChooseCoinTrajectory(Trajectory[] trajectories, out Item item)
+    public override int ChooseCoinTrajectory(Trajectory[] trajectories, out int itemIndex)
     {
         int index = -1;
-        item = null;
+        itemIndex = -1;
         //TODO Parte Grafica sia Item che traiettoria
         index = 0;
-        return trajectories[index];
+        return index;
     }
 
-    public override Trajectory ChooseEnemyTrajectory(Trajectory[] trajectories)
+    public override int ChooseEnemyTrajectory(Trajectory[] trajectories)
     {
         int index = -1;
         //TODO Parte Grafica Scelta traiettoria nemica
         index = 0;
-        return trajectories[index];
+        return index;
     }
 
     protected override void CheckForThrow()

@@ -18,15 +18,16 @@ public class AI : PG
         return index;
     }
 
-    public override Trajectory ChooseCoinTrajectory(Trajectory[] trajectories, out Item item)
+    public override int ChooseCoinTrajectory(Trajectory[] trajectories, out int itemIndex)
     {
-        item = null;
-        return trajectories[Random.Range(0, trajectories.Length)];
+        itemIndex = -1;
+
+        return Random.Range(0, trajectories.Length);
     }
 
-    public override Trajectory ChooseEnemyTrajectory(Trajectory[] trajectories)
+    public override int ChooseEnemyTrajectory(Trajectory[] trajectories)
     {
-        return trajectories[Random.Range(0, trajectories.Length)];
+        return Random.Range(0, trajectories.Length);
     }
 
     protected override void CheckForThrow()
