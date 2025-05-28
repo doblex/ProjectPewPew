@@ -8,10 +8,12 @@ public class TurnManager : MonoBehaviour
     public delegate void OnPlayerChooseCoin(Coin[] coins);
     public delegate void OnPlayerChooseCoinTrajectory(Trajectory[] trajectories,Item[] item);
     public delegate void OnPlayerChooseEnemyTrajectory(Trajectory[] trajectories);
+    public delegate void OnTurnEnd(PlayerType playerType);
 
     public OnPlayerChooseCoin onPlayerChooseCoin;
     public OnPlayerChooseCoinTrajectory onPlayerChooseCoinTrajectory;
     public OnPlayerChooseEnemyTrajectory onPlayerChooseEnemyTrajectory;
+    public OnTurnEnd onTurnEnd;
 
     [SerializeField] int pointsCap = 25;
 
@@ -86,6 +88,8 @@ public class TurnManager : MonoBehaviour
         currentActivePlayer = NextPlayerIndex;
         currentSelectedCoin = -1;
         isThrowing = false;
+
+        onTurnEnd?.Invoke(players[currentActivePlayer].playerType);
     }
 
     public void SetCoin(int index)
