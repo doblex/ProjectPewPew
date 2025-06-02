@@ -6468,6 +6468,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Silver Coin
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 54572e2aa2da0b64fa4edc0eb24a34f6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
