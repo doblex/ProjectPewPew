@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_CoinSheen
+  m_Name: M_CopperCoinSheen
   m_Shader: {fileID: -6465566751694194690, guid: d5ddd2675e2c2244895036a9dc14fd69, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -66,7 +66,7 @@ Material:
     - _Light_refraction: 0.34
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Sheen_Speed: 1.5
+    - _Sheen_Speed: 0.8
     - _Sheen_intensity: 0.5
     m_Colors: []
   m_BuildTextureStacks: []
