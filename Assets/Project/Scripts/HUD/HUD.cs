@@ -54,7 +54,7 @@ public class HUD : MonoBehaviour
     {
         StartMenuPanel_ref.SetActive(false);
         GamePanel_ref.SetActive(true);
-        DialogueSystem_ref.StartDialogue(StartDialogueInfo_ref, 0);
+        DialogueSystem_ref.StartDialogue(StartDialogueInfo_ref, 0, () => { onStartGame.Invoke(); } );
         //TODO Animazione Moneta
         //TODO Lancio delegato di start
     }

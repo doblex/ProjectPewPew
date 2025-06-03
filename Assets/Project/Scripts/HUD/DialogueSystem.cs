@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -10,20 +11,25 @@ public class DialogueSystem : MonoBehaviour
     HUD HUD_ref;
     int ActualDestinationIndex;
     int StartDialogueIndex;
+    Action Action;
+
     private void Start()
     {
         HUD_ref = gameObject.GetComponent<HUD>();
     }
 
-    public void StartDialogue(DialogueInfo dialogueInfo, int StartIndex)
+    public void StartDialogue(DialogueInfo dialogueInfo, int StartIndex, Action action = null)
     {
         SetupDialogue( dialogueInfo, StartIndex);
         DialogueSystemPanel_ref.SetActive(true);
+
+        Action = action;
     }
 
     public void EndDialogue()
     {
         DialogueSystemPanel_ref.SetActive(false);
+        Action?.Invoke();
     }
 
     public void SetupDialogue(DialogueInfo dialogueInfo_ref, int StartIndex)
