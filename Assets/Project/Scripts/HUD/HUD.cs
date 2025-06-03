@@ -1,26 +1,37 @@
-using System.ComponentModel;
-using Unity.VisualScripting;
-using UnityEditor.SearchService;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class HUD : MonoBehaviour
 {
+    public delegate void OnStartGame();
     public delegate void OnChooseCoin();
     public delegate void OnChooseCoinTrajectory();
     public delegate void OnChooseEnemyTrajectory();
 
+    public OnStartGame onStartGame;
     public OnChooseCoin onChooseCoin;
     public OnChooseCoinTrajectory onChooseCoinTrajectory;
     public OnChooseEnemyTrajectory onChooseEnemyTrajectory;
 
+    CoinType ChoosenCoin;
+
     [SerializeField, Header("Info"), Space(10f)] bool b_IsOptionsPanelOpen;
     [SerializeField] bool b_IsChooseInitialPlayerPanelOpen;
+    [SerializeField] public bool b_IsTrajectoriesPanelOpen;
 
     [SerializeField, Header("Setup HUD"), Space(10f)] GameObject StartMenuPanel_ref;
     [SerializeField] GameObject GamePanel_ref;
     [SerializeField] GameObject OptionsPanel_ref;
     [SerializeField] GameObject ConfirmPanel_ref;
+    [SerializeField] GameObject CoinDifficultyPanel_ref;
+    [SerializeField] GameObject TrajectoriesPanel_ref;
+    [SerializeField] GameObject TwoTrajectoriesPanel_ref;
+    [SerializeField] GameObject ThreeTrajectoriesPanel_ref;
+    [SerializeField] int MinNumberOfTrajectories;
+    [SerializeField] int MaxNumberOfTrajectories;
+    SelectorToggle SelectorToggle_ref;
 
     [SerializeField, Header("Setup Turn Indicator"), Space(10f)] GameObject TurnIndicator_ref;
     [SerializeField] Vector3 PlayerTurnIdicatorPosition;
@@ -33,28 +44,19 @@ public class HUD : MonoBehaviour
     float timer;
     [SerializeField] float DelayPassDialogue;
 
-    bool b_CycleDialogueIsRunning;
     void Start()
     {
-        timer = 0;
         DialogueSystem_ref = gameObject.GetComponent<DialogueSystem>();
-    }
-
-    void Update()
-    {
-        if (b_CycleDialogueIsRunning)
-        {
-            CycleDialogue();
-        }
+        TurnManager.Instance.onTurnEnd += ToggleTurnIndicatorPosition;
     }
 
     public void StartGame()
     {
-        //TODO Aggiungere start animazione del nemico (Raccoglie monete) 
         StartMenuPanel_ref.SetActive(false);
         GamePanel_ref.SetActive(true);
-        DialogueSystem_ref.StartDialogue(StartDialogueInfo_ref,0);
-        //TODO Breve spiegazione con dialogo testuale del gioco
+        DialogueSystem_ref.StartDialogue(StartDialogueInfo_ref, 0);
+        //TODO Animazione Moneta
+        //TODO Lancio delegato di start
     }
 
     public void ExitGame()
@@ -74,18 +76,12 @@ public class HUD : MonoBehaviour
 
     public void CycleDialogue()
     {
-        timer += Time.deltaTime;
-        if (timer >= DelayPassDialogue)
-        {
-            timer = 0;
-            b_CycleDialogueIsRunning = false;
-            DialogueSystem_ref.ContinueDialogue();
-        }
+        DialogueSystem_ref.ContinueDialogue();
     }
 
     public void ActivateCycleDialogue()
     {
-        b_CycleDialogueIsRunning = true;
+        Invoke("CycleDialogue", DelayPassDialogue);
     }
 
     public void ToggleOptionsMenu()
@@ -133,13 +129,85 @@ public class HUD : MonoBehaviour
         }
     }
 
-    public void ToggleTurnIndicatorPosition()
+    public void ToggleTurnIndicatorPosition(PlayerType playerType)
     {
-        //TODOChiedere l'aggiunta di un delegato per il passaggio di turno a cui legare questa funzione
-        //TODOin caso sia Player
-        TurnIndicator_ref.transform.localPosition = PlayerTurnIdicatorPosition;
-        //TODOin caso sia IA
-        TurnIndicator_ref.transform.localPosition = IATurnIdicatorPosition;
+        if (playerType == PlayerType.PLAYER)
+        {
+            TurnIndicator_ref.transform.localPosition = PlayerTurnIdicatorPosition;
+        }
+        else
+        {
+            TurnIndicator_ref.transform.localPosition = IATurnIdicatorPosition;
+        }
+    }
+
+    public void LaunchCoin()
+    {
+        //TODO Inserire animazione lancio della moneta
+        Debug.LogError("Inizia il giocatore");
+    }
+
+    public void ChoseCoin(int coinType)
+    {
+        ChoosenCoin = (CoinType)coinType;
+        CoinDifficultyPanel_ref.SetActive(false);
+        OpenTrajectoriesPanel(3);
+    }
+
+    public void OpenTrajectoriesPanel(int TrajectoriesQuantity)
+    {
+        if (TrajectoriesQuantity < MinNumberOfTrajectories || TrajectoriesQuantity > MaxNumberOfTrajectories)
+        {
+            Debug.LogError("Quantità traiettorie invalida");
+        }
+        else
+        {
+            TrajectoriesPanel_ref.SetActive(true);
+            switch (TrajectoriesQuantity)
+            {
+                case 2:
+                    TwoTrajectoriesPanel_ref.SetActive(true);
+                    SelectorToggle_ref = TwoTrajectoriesPanel_ref.transform.Find("SelectorCenter").GetComponent<SelectorToggle>();
+                    TwoTrajectoriesPanel_ref.GetComponent<TrajectoriesToggle>().b_PanelIsOpenig = false;
+                    TwoTrajectoriesPanel_ref.GetComponent<TrajectoriesToggle>().enabled = true;
+                    break;
+                case 3:
+                    ThreeTrajectoriesPanel_ref.SetActive(true);
+                    SelectorToggle_ref = ThreeTrajectoriesPanel_ref.transform.Find("SelectorCenter").GetComponent<SelectorToggle>();
+                    TwoTrajectoriesPanel_ref.GetComponent<TrajectoriesToggle>().b_PanelIsOpenig = false;
+                    ThreeTrajectoriesPanel_ref.GetComponent<TrajectoriesToggle>().enabled = true;
+                    break;
+            }  
+        }
+    }
+    
+    public void EnableTrajectories()
+    {
+        ThreeTrajectoriesPanel_ref.GetComponent<TrajectoriesToggle>().enabled = true;
+    }
+
+    public void CloseTrajectoriesPanel(int TrajectoriesQuantity)
+    {
+        TrajectoriesPanel_ref.SetActive(false);
+        if (TwoTrajectoriesPanel_ref.activeInHierarchy)
+        {
+            TwoTrajectoriesPanel_ref.SetActive(false);
+        }
+        if (ThreeTrajectoriesPanel_ref.activeInHierarchy)
+        {
+            ThreeTrajectoriesPanel_ref.SetActive(false);
+        }
+    }
+
+    public void ConfirmTrajectory()
+    {
+
+    }
+
+    public void ChooseTrajectory(int TrajectoryIndex)
+    {
+        SelectorToggle_ref.trajectoryType = (TrajectoryType)TrajectoryIndex;
+        SelectorToggle_ref.enabled = true;
     }
 
     
