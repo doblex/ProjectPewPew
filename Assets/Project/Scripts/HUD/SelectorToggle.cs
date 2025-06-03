@@ -38,13 +38,10 @@ public class SelectorToggle : MonoBehaviour
         timer += Time.deltaTime;
         if (TrajectorySelector_ref.anchoredPosition != DestinationPosition)
         {
-            Debug.LogError("Sposto il selettore " + TrajectorySelector_ref);
-            Debug.LogError("Attualmente nella posizione " + TrajectorySelector_ref.anchoredPosition);
             TrajectorySelector_ref.anchoredPosition = Vector2.Lerp(StartPosition, DestinationPosition, timer / MovingTime);
         }
         else
         {
-            Debug.LogError("Disattivo lo script");
             this.enabled = false;
         }
     }

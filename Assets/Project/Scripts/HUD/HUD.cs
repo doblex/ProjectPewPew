@@ -1,10 +1,13 @@
 
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class HUD : MonoBehaviour
 {
+    public Material HighlightMaterial_ref;
+
     public delegate void OnStartGame();
     public delegate void OnChooseCoin();
     public delegate void OnChooseCoinTrajectory();
@@ -44,10 +47,17 @@ public class HUD : MonoBehaviour
     float timer;
     [SerializeField] float DelayPassDialogue;
 
+    GameObject ActualHittedObject;
+
     void Start()
     {
         DialogueSystem_ref = gameObject.GetComponent<DialogueSystem>();
         TurnManager.Instance.onTurnEnd += ToggleTurnIndicatorPosition;
+    }
+
+    void Update()
+    {
+        CheckMousePosition();
     }
 
     public void StartGame()
@@ -55,13 +65,14 @@ public class HUD : MonoBehaviour
         StartMenuPanel_ref.SetActive(false);
         GamePanel_ref.SetActive(true);
         DialogueSystem_ref.StartDialogue(StartDialogueInfo_ref, 0, () => { onStartGame.Invoke(); } );
-        //TODO Animazione Moneta
-        //TODO Lancio delegato di start
     }
 
     public void ExitGame()
     {
         Application.Quit();
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #endif
     }
 
     public void ResetScene()
@@ -210,5 +221,34 @@ public class HUD : MonoBehaviour
         SelectorToggle_ref.enabled = true;
     }
 
-    
+    void CheckMousePosition()
+    {
+        RaycastHit HittedObject;
+        bool isOverUI = UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject();
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out HittedObject) && !isOverUI)
+        {
+            if (HittedObject.collider.gameObject != ActualHittedObject)
+            {
+                if (ActualHittedObject != null)
+                {
+                    ActualHittedObject.GetComponent<I_ObjectReaction>().ObjectRemoveHighlight();
+                }
+                ActualHittedObject = HittedObject.collider.gameObject;
+                ActualHittedObject.GetComponent<I_ObjectReaction>().ObjectHighlight();
+            }
+            if (Input.GetMouseButtonDown(0))
+            {
+                ActualHittedObject.GetComponent<I_ObjectReaction>().ObjectInteract();
+            }
+        }
+        else
+        {
+            if (ActualHittedObject != null)
+            {
+                ActualHittedObject.GetComponent<I_ObjectReaction>().ObjectRemoveHighlight();
+            }
+            ActualHittedObject = null;
+        }
+    }
+
 }
