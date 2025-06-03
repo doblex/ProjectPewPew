@@ -1,13 +1,17 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class TurnManager : MonoBehaviour
 {
     public static TurnManager Instance;
 
+    [SerializeField] Coin OxydizedCoin;
+    [SerializeField] DummyPlayer dummyPlayer;
+
     public delegate void OnPlayerChooseCoin(Coin[] coins);
     public delegate void OnPlayerChooseCoinTrajectory(Trajectory[] trajectories,Item[] item);
-    public delegate void OnPlayerChooseEnemyTrajectory(Trajectory[] trajectories);
+    public delegate void OnPlayerChooseEnemyTrajectory(Trajectory[] trajectories, Item[] item);
     public delegate void OnTurnEnd(PlayerType playerType);
 
     public OnPlayerChooseCoin onPlayerChooseCoin;
@@ -19,7 +23,7 @@ public class TurnManager : MonoBehaviour
 
     [SerializeField] PG[] players;
     [SerializeField] Coin[] throwableCoins;
-    [SerializeField] Item[] items;
+    [SerializeField] ItemManager itemManager;
 
     [Header("Debug variables DONT TOUCH")]
     public TurnPhase TurnPhase;
@@ -45,6 +49,14 @@ public class TurnManager : MonoBehaviour
 
     private void Start()
     {
+        if (dummyPlayer != null)
+        {
+            dummyPlayer.Setup();
+            dummyPlayer.onChooseCoinEnded += OnSetCoin;
+            dummyPlayer.onChooseCoinTrajectoryEnded += OnSetThrowingTrajectory;
+            dummyPlayer.onChooseShootingTrajectoryEnded += OnSetShootingTrajectory;
+        }
+
         TrajectoryManager.Instance.onThrowEnded += OnThrowEnded;
         ChooseFirstPlayer();
     }
@@ -61,6 +73,7 @@ public class TurnManager : MonoBehaviour
             }
             else
             {
+
                 SetCoin(players[currentActivePlayer].ChooseCoinDifficulty(throwableCoins));
                 PrepareThrow();
             }
@@ -134,16 +147,19 @@ public class TurnManager : MonoBehaviour
 
         if (players[NextPlayerIndex].playerType == PlayerType.PLAYER)
         { 
-            onPlayerChooseCoinTrajectory?.Invoke(validTrajectories, items); //TODO Collegare Parte Grafica
+            onPlayerChooseCoinTrajectory?.Invoke(validTrajectories, itemManager.GetAllItems()); //TODO Collegare Parte Grafica
         }
         else
         {
-               int trajectoryIndex = players[NextPlayerIndex].ChooseCoinTrajectory(
+            int trajectoryIndex = 0;
+            int itemIndex = -1;
+
+            trajectoryIndex = players[NextPlayerIndex].ChooseCoinTrajectory(
                     validTrajectories,
-                    out int itemIndex
+                    out itemIndex
                     );
 
-            OnSetThrowingTrajectory(trajectoryIndex, itemIndex);
+             OnSetThrowingTrajectory(trajectoryIndex, itemIndex);
         }
     }
 
@@ -151,12 +167,17 @@ public class TurnManager : MonoBehaviour
 
     public void OnSetThrowingTrajectory(int trajectoryIndex, int itemIndex = -1)
     {
+        if (itemIndex == 1)
+        {
+            currentSelectedCoin = -1;
+        }
+
         gTrajectoryIndex = trajectoryIndex;
         TurnPhase = TurnPhase.ActiveTrajectorySelection;
 
         if (players[currentActivePlayer].playerType == PlayerType.PLAYER)
         {
-            onPlayerChooseEnemyTrajectory?.Invoke(validTrajectories); //TODO Collegare Parte Grafica
+            onPlayerChooseEnemyTrajectory?.Invoke(validTrajectories, itemManager.GetAllItems()); //TODO Collegare Parte Grafica
         }
         else 
         {
@@ -164,11 +185,16 @@ public class TurnManager : MonoBehaviour
         }
     }
 
-    public void OnSetShootingTrajectory(int shootingTrajectoryIndex) 
+    public void OnSetShootingTrajectory(int shootingTrajectoryIndex, int itemIndex = -1) 
     {
         if (validTrajectories[shootingTrajectoryIndex] == validTrajectories[gTrajectoryIndex])
         {
-            TrajectoryManager.Instance.SpawnCoin(players[currentActivePlayer], players[NextPlayerIndex], validTrajectories[shootingTrajectoryIndex], throwableCoins[currentSelectedCoin]);
+            if (currentSelectedCoin >= 0)
+                TrajectoryManager.Instance.SpawnCoin(players[currentActivePlayer], players[NextPlayerIndex], validTrajectories[shootingTrajectoryIndex], throwableCoins[currentSelectedCoin]);
+            else
+            {
+                TrajectoryManager.Instance.SpawnCoin(players[currentActivePlayer], players[NextPlayerIndex], validTrajectories[shootingTrajectoryIndex], OxydizedCoin);
+            }
         }
         else
         {
@@ -195,6 +221,21 @@ public class TurnManager : MonoBehaviour
         if (players[currentActivePlayer].Points >= pointsCap)
         {
             Debug.Log("SOMEONE WINs!!!!!");
+        }
+    }
+
+    private void OnGUI()
+    {
+        GUIStyle coloredStyle = new GUIStyle(EditorStyles.label);
+        coloredStyle.normal.textColor = Color.white;
+
+        EditorGUILayout.LabelField(TurnPhase.ToString(), coloredStyle);
+        EditorGUILayout.LabelField(currentActivePlayer.ToString(), coloredStyle);
+
+
+        foreach (var player in players)
+        {
+            EditorGUILayout.LabelField(player.playerType.ToString(),player.Points.ToString(), coloredStyle);
         }
     }
 }

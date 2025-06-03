@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public class DialogueInfo : MonoBehaviour
 {
     [Header("Contact info"), Space(10f), SerializeField] public Sprite ContactSprite;

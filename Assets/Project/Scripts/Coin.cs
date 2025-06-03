@@ -8,6 +8,7 @@ public class Coin : MonoBehaviour
     [SerializeField] int points = 1;
     [SerializeField, Range(0, 1)] public float shineStart;
     [SerializeField, Range(0.1f, 1)] float duration;
+    [SerializeField] bool isOxydated = false;
 
     [Header("Shining & Hit Effects")]
     [SerializeField] GameObject shiningEffect;
@@ -23,6 +24,7 @@ public class Coin : MonoBehaviour
     public CoinType Type { get => type; }
     public int Points { get => points; }
     public float AIHitProbability { get => aIHitProbability;}
+    public bool IsOxydated { get => isOxydated; }
 
     public void Start()
     {
@@ -33,7 +35,7 @@ public class Coin : MonoBehaviour
     {
         if (shiningEffect != null)
         {
-            shiningEffect.SetActive(!isShining);
+            shiningEffect.SetActive(isShining);
         }
     }
 

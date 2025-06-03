@@ -1,16 +1,40 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour
+[Serializable]
+public class Item
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public Sprite image;
+    public string name;
+    public string description;
+
+    public ItemUsePhase phase;
+    public bool isUsed;
+}
+
+[Serializable]
+public class ItemManager 
+{
+    [SerializeField] Item[] items;
+
+    public Item[] GetAllItems() 
     {
-        
+        return items;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public Item[] GetItemsWithType(ItemUsePhase phase)
+    { 
+        List<Item> list = new List<Item>();
+
+        foreach (Item item in items)
+        {
+            if (item.phase == phase)
+            { 
+                list.Add(item);
+            }
+        }
+
+        return list.ToArray();
     }
 }

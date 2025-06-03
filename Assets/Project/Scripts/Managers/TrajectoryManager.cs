@@ -99,7 +99,7 @@ public class TrajectoryManager : MonoBehaviour
 
     private void CheckForShining(float amount)
     {
-        if (amount >= currentCoinTrowed.shineStart && !isShining && amount <= currentCoinTrowed.ShineEnd)
+        if ((amount >= currentCoinTrowed.shineStart && !isShining && amount <= currentCoinTrowed.ShineEnd) && !currentCoinTrowed.IsOxydated)
         {
             isShining = true;
             Debug.Log("Shining!!!");
@@ -108,11 +108,11 @@ public class TrajectoryManager : MonoBehaviour
             if (currentShootingPlayer.playerType == PlayerType.AI)
             {
                 int rnd = Random.Range(1, 101);
-                Debug.Log("AI Shooting Outcome " + rnd.ToString() + "/" + currentCoinTrowed.AIHitProbability);
+                //Debug.Log("AI Shooting Outcome " + rnd.ToString() + "/" + currentCoinTrowed.AIHitProbability);
                 if (rnd <= currentCoinTrowed.AIHitProbability)
                 { 
                     onAIShoot?.Invoke();
-                    Debug.Log("AI Shooted");
+                    //Debug.Log("AI Shooted");
                 }
             }
 
