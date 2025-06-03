@@ -1,0 +1,112 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3069578678304491984
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6360593012434679583}
+  - component: {fileID: 8923052500544415514}
+  - component: {fileID: 9063137086632411969}
+  - component: {fileID: 3784635093630135469}
+  - component: {fileID: 1160481191722581239}
+  m_Layer: 0
+  m_Name: Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6360593012434679583
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3069578678304491984}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8923052500544415514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3069578678304491984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6708a46f2391b374e820811948906d37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 2
+--- !u!114 &9063137086632411969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3069578678304491984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 585442f3e759a8d4f81241cf1fbb026e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OxydizedCoin: {fileID: 5284052278846036475, guid: bf5743cafc45b0e4a8538ebfbaeb36bd, type: 3}
+  dummyPlayer: {fileID: 3784635093630135469}
+  AITimeBetweenActions: 2
+  pointsCap: 20
+  players:
+  - {fileID: 0}
+  - {fileID: 0}
+  throwableCoins:
+  - {fileID: 5284052278846036475, guid: 0341ff9d6aaab804ba723b4826cbb878, type: 3}
+  itemManager:
+    items: []
+  TurnPhase: 0
+  currentActivePlayer: -1
+  currentSelectedCoin: -1
+--- !u!114 &3784635093630135469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3069578678304491984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ed2114c72bd9bf438d26ee45b11381c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1160481191722581239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3069578678304491984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d0fa7a5828ef6442ab6ba43822916b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dialogueSystem: {fileID: 0}
+  tailsDialogue: []
+  headsDialogue: []
+  easyThrowDialogue: []
+  mediumThrowDialogue: []
+  difficultThrowDialogue: []
+  failedShootDialogue: []
+  succesShootDialogue: []
+  playerWinDialogue: []
+  playerLoseDialogue: []
+  EnemyDifficultySelectionDialogue: []
+  EnemyEndTurnDialogue: []

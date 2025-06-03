@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class AI : PG
 {
+    [SerializeField] Animator animator;
+
     float coinTimer = 0;
 
     public AI ()
@@ -34,6 +36,7 @@ public class AI : PG
     {
         if (coinTimer <= 0 && CanTrow)
         {
+            animator.SetTrigger("trTossCoin");
             Throw();
         }
 
@@ -48,6 +51,12 @@ public class AI : PG
     public void RemoveShootEvent(TrajectoryManager trajectoryManager) 
     {
         trajectoryManager.onAIShoot -= Shoot;
+    }
+
+    public override void Shoot()
+    {
+        base.Shoot();
+        animator.SetTrigger("trShoot");
     }
 
     protected override void CheckForShoot()

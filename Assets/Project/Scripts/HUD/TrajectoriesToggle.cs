@@ -97,7 +97,7 @@ public class TrajectoriesToggle : MonoBehaviour
             }
             else
             {
-                HUD_ref.CloseTrajectoriesPanel(TrajectoriesNumber);
+                HUD_ref.CloseTrajectoriesPanel();
                 this.enabled = false;
             }
         }

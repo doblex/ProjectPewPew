@@ -42,5 +42,5 @@ public abstract class PG : MonoBehaviour
     protected abstract void CheckForThrow();
     protected abstract void CheckForShoot();
     protected void Throw() { onPlayerThrow?.Invoke(this); }
-    public void Shoot() { onPlayerShoot?.Invoke(this); }
+    public virtual void Shoot() { onPlayerShoot?.Invoke(this); }
 }

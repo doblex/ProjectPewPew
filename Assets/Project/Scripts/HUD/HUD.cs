@@ -6,11 +6,15 @@ using UnityEngine.UIElements;
 
 public class HUD : MonoBehaviour
 {
+    public static HUD Instance;
+
+    public LayerMask objectsLayermask;
+
     public Material HighlightMaterial_ref;
 
     public delegate void OnStartGame();
-    public delegate void OnChooseCoin();
-    public delegate void OnChooseCoinTrajectory();
+    public delegate void OnChooseCoin(int index);
+    public delegate void OnChooseCoinTrajectory(int trajectoryIndex, int itemIndex);
     public delegate void OnChooseEnemyTrajectory();
 
     public OnStartGame onStartGame;
@@ -49,10 +53,27 @@ public class HUD : MonoBehaviour
 
     GameObject ActualHittedObject;
 
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
     void Start()
     {
         DialogueSystem_ref = gameObject.GetComponent<DialogueSystem>();
         TurnManager.Instance.onTurnEnd += ToggleTurnIndicatorPosition;
+        TurnManager.Instance.onPlayerChooseCoin += OpenCoinPanel;
+        TurnManager.Instance.onPlayerChooseCoinTrajectory += OpenTrajectoriesPanel;
+        TurnManager.Instance.onPlayerChooseEnemyTrajectory += OpenTrajectoriesPanel;
+
+        //TODO Attaccarsi ai player;
     }
 
     void Update()
@@ -109,6 +130,11 @@ public class HUD : MonoBehaviour
         }
     }
 
+    public void OpenCoinPanel() 
+    {
+        CoinDifficultyPanel_ref.SetActive(true);
+    }
+
     public void OpenConfirmPanel()
     {
         ConfirmPanel_ref.SetActive(true);
@@ -158,15 +184,16 @@ public class HUD : MonoBehaviour
         Debug.LogError("Inizia il giocatore");
     }
 
-    public void ChoseCoin(int coinType)
+    public void ChooseCoin(int coinType)
     {
         ChoosenCoin = (CoinType)coinType;
         CoinDifficultyPanel_ref.SetActive(false);
-        OpenTrajectoriesPanel(3);
+        onChooseCoin?.Invoke(coinType);
     }
 
-    public void OpenTrajectoriesPanel(int TrajectoriesQuantity)
+    public void OpenTrajectoriesPanel(int TrajectoriesQuantity, Item[] items)
     {
+        //TODO ITEMS
         if (TrajectoriesQuantity < MinNumberOfTrajectories || TrajectoriesQuantity > MaxNumberOfTrajectories)
         {
             Debug.LogError("Quantità traiettorie invalida");
@@ -176,6 +203,10 @@ public class HUD : MonoBehaviour
             TrajectoriesPanel_ref.SetActive(true);
             switch (TrajectoriesQuantity)
             {
+                case 1:
+                    OnConfirmTrajectory(false);
+                    break;
+
                 case 2:
                     TwoTrajectoriesPanel_ref.SetActive(true);
                     SelectorToggle_ref = TwoTrajectoriesPanel_ref.transform.Find("SelectorCenter").GetComponent<SelectorToggle>();
@@ -197,7 +228,7 @@ public class HUD : MonoBehaviour
         ThreeTrajectoriesPanel_ref.GetComponent<TrajectoriesToggle>().enabled = true;
     }
 
-    public void CloseTrajectoriesPanel(int TrajectoriesQuantity)
+    public void CloseTrajectoriesPanel()
     {
         TrajectoriesPanel_ref.SetActive(false);
         if (TwoTrajectoriesPanel_ref.activeInHierarchy)
@@ -210,9 +241,24 @@ public class HUD : MonoBehaviour
         }
     }
 
-    public void ConfirmTrajectory()
+    public void ConfirmTrajectory() 
     {
+        OnConfirmTrajectory();
+    }
 
+    public void OnConfirmTrajectory(bool isSelected = true)
+    {
+        int trajectoryIndex = 0;
+        int itemIndex = -1;
+
+        if (isSelected)
+        {
+            trajectoryIndex = (int)SelectorToggle_ref.trajectoryType;
+            itemIndex = -1; //TODO Sistemare items
+        }
+         
+        CloseTrajectoriesPanel();
+        onChooseCoinTrajectory?.Invoke(trajectoryIndex, itemIndex);
     }
 
     public void ChooseTrajectory(int TrajectoryIndex)
@@ -225,7 +271,7 @@ public class HUD : MonoBehaviour
     {
         RaycastHit HittedObject;
         bool isOverUI = UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject();
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out HittedObject) && !isOverUI)
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out HittedObject, 100f , objectsLayermask) && !isOverUI)
         {
             if (HittedObject.collider.gameObject != ActualHittedObject)
             {
@@ -245,7 +291,14 @@ public class HUD : MonoBehaviour
         {
             if (ActualHittedObject != null)
             {
-                ActualHittedObject.GetComponent<I_ObjectReaction>().ObjectRemoveHighlight();
+                I_ObjectReaction i_ObjectReaction = null;
+
+                ActualHittedObject.TryGetComponent<I_ObjectReaction>(out i_ObjectReaction);
+
+                if (i_ObjectReaction != null)
+                { 
+                    ActualHittedObject.GetComponent<I_ObjectReaction>().ObjectRemoveHighlight();
+                }
             }
             ActualHittedObject = null;
         }

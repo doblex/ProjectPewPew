@@ -13,9 +13,9 @@ public class DummyPlayer : MonoBehaviour
 
     public void Setup() 
     {
-        TurnManager.Instance.onPlayerChooseCoin += OnPlayerChooseCoin;
-        TurnManager.Instance.onPlayerChooseCoinTrajectory += OnPlayerChooseCoinTrajectory;
-        TurnManager.Instance.onPlayerChooseEnemyTrajectory += OnPlayerChooseEnemyTrajectory;
+        //TurnManager.Instance.onPlayerChooseCoin += OnPlayerChooseCoin;
+        //TurnManager.Instance.onPlayerChooseCoinTrajectory += OnPlayerChooseCoinTrajectory;
+        //TurnManager.Instance.onPlayerChooseEnemyTrajectory += OnPlayerChooseEnemyTrajectory;
     }
 
     private void OnPlayerChooseEnemyTrajectory(Trajectory[] trajectories, Item[] item)

@@ -787,6 +787,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d2c87ae54b84746964891ab6c1c440, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectsLayermask:
+    serializedVersion: 2
+    m_Bits: 0
   HighlightMaterial_ref: {fileID: 0}
   b_IsOptionsPanelOpen: 0
   b_IsChooseInitialPlayerPanelOpen: 0
@@ -2427,7 +2430,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5208884030484077168}
         m_TargetAssemblyTypeName: HUD, Assembly-CSharp
-        m_MethodName: ChoseCoin
+        m_MethodName: ChooseCoin
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6225,7 +6228,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5208884030484077168}
         m_TargetAssemblyTypeName: HUD, Assembly-CSharp
-        m_MethodName: ChoseCoin
+        m_MethodName: ChooseCoin
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6600,7 +6603,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5208884030484077168}
         m_TargetAssemblyTypeName: HUD, Assembly-CSharp
-        m_MethodName: ChoseCoin
+        m_MethodName: ChooseCoin
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

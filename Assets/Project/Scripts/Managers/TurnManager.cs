@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class TurnManager : MonoBehaviour
 {
@@ -12,9 +13,9 @@ public class TurnManager : MonoBehaviour
     [SerializeField] DummyPlayer dummyPlayer;
     [SerializeField] float AITimeBetweenActions = 2f;
 
-    public delegate void OnPlayerChooseCoin(Coin[] coins);
-    public delegate void OnPlayerChooseCoinTrajectory(Trajectory[] trajectories,Item[] item);
-    public delegate void OnPlayerChooseEnemyTrajectory(Trajectory[] trajectories, Item[] item);
+    public delegate void OnPlayerChooseCoin();
+    public delegate void OnPlayerChooseCoinTrajectory(int trajectoriesCount, Item[] item);
+    public delegate void OnPlayerChooseEnemyTrajectory(int trajectoriesCount, Item[] item);
     public delegate void OnTurnEnd(PlayerType playerType);
 
     public OnPlayerChooseCoin onPlayerChooseCoin;
@@ -37,6 +38,8 @@ public class TurnManager : MonoBehaviour
     Trajectory[] validTrajectories;
 
     private int NextPlayerIndex => (currentActivePlayer + 1) % players.Length;
+
+    public PG[] Players  { get => players; }
 
     private void Awake()
     {
@@ -61,28 +64,42 @@ public class TurnManager : MonoBehaviour
         }
 
         TrajectoryManager.Instance.onThrowEnded += OnThrowEnded;
-        ChooseFirstPlayer();
+        HUD.Instance.onStartGame += OnStartGame;
+       
     }
 
     private void Update()
+    {
+        CheckForNextPlayer();
+    }
+
+    private void CheckForNextPlayer()
     {
         if (currentActivePlayer != -1 && TurnPhase == TurnPhase.NextPlayer)
         {
             isThrowing = true;
             TurnPhase = TurnPhase.ActiveCoinSelection;
+             //TODO dialogo
+
             if (players[currentActivePlayer].playerType == PlayerType.PLAYER)
             {
-                onPlayerChooseCoin?.Invoke(throwableCoins); //TODO Collegare Parte Grafica
+                onPlayerChooseCoin?.Invoke(); //TODO Collegare Parte Grafica
             }
             else
             {
                 StartCoroutine(Delay(AITimeBetweenActions,
-                    () => {
-                    SetCoin(players[currentActivePlayer].ChooseCoinDifficulty(throwableCoins));
-                    PrepareThrow();
-                }));
+                    () =>
+                    {
+                        SetCoin(players[currentActivePlayer].ChooseCoinDifficulty(throwableCoins));
+                        PrepareThrow();
+                    }));
             }
         }
+    }
+
+    void OnStartGame() 
+    {
+        ChooseFirstPlayer();
     }
 
     public void OnSetCoin(int index)
@@ -91,12 +108,11 @@ public class TurnManager : MonoBehaviour
         PrepareThrow();
     }
 
-
     public void ChooseFirstPlayer()
     {
         //ThrowCoinAnimation
-        //currentActivePlayer = Random.Range(0, players.Length);
-        currentActivePlayer = 1;
+
+        currentActivePlayer = Random.Range(0, players.Length);
         TurnPhase = TurnPhase.NextPlayer;
     }
 
@@ -152,7 +168,7 @@ public class TurnManager : MonoBehaviour
 
         if (players[NextPlayerIndex].playerType == PlayerType.PLAYER)
         { 
-            onPlayerChooseCoinTrajectory?.Invoke(validTrajectories, itemManager.GetAllItems()); //TODO Collegare Parte Grafica
+            onPlayerChooseCoinTrajectory?.Invoke(validTrajectories.Length, itemManager.GetAllItems()); //TODO Collegare Parte Grafica
         }
         else
         {
@@ -168,8 +184,6 @@ public class TurnManager : MonoBehaviour
 
                        OnSetThrowingTrajectory(trajectoryIndex, itemIndex);
                    }));
-
-            
         }
     }
 
@@ -187,7 +201,7 @@ public class TurnManager : MonoBehaviour
 
         if (players[currentActivePlayer].playerType == PlayerType.PLAYER)
         {
-            onPlayerChooseEnemyTrajectory?.Invoke(validTrajectories, itemManager.GetAllItems()); //TODO Collegare Parte Grafica
+            onPlayerChooseEnemyTrajectory?.Invoke(validTrajectories.Length, itemManager.GetAllItems()); //TODO Collegare Parte Grafica
         }
         else 
         {
