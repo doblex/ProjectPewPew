@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -8,6 +10,7 @@ public class TurnManager : MonoBehaviour
 
     [SerializeField] Coin OxydizedCoin;
     [SerializeField] DummyPlayer dummyPlayer;
+    [SerializeField] float AITimeBetweenActions = 2f;
 
     public delegate void OnPlayerChooseCoin(Coin[] coins);
     public delegate void OnPlayerChooseCoinTrajectory(Trajectory[] trajectories,Item[] item);
@@ -73,9 +76,11 @@ public class TurnManager : MonoBehaviour
             }
             else
             {
-
-                SetCoin(players[currentActivePlayer].ChooseCoinDifficulty(throwableCoins));
-                PrepareThrow();
+                StartCoroutine(Delay(AITimeBetweenActions,
+                    () => {
+                    SetCoin(players[currentActivePlayer].ChooseCoinDifficulty(throwableCoins));
+                    PrepareThrow();
+                }));
             }
         }
     }
@@ -154,12 +159,17 @@ public class TurnManager : MonoBehaviour
             int trajectoryIndex = 0;
             int itemIndex = -1;
 
-            trajectoryIndex = players[NextPlayerIndex].ChooseCoinTrajectory(
+            StartCoroutine(Delay(AITimeBetweenActions,
+                   () => {
+                       trajectoryIndex = players[NextPlayerIndex].ChooseCoinTrajectory(
                     validTrajectories,
                     out itemIndex
                     );
 
-             OnSetThrowingTrajectory(trajectoryIndex, itemIndex);
+                       OnSetThrowingTrajectory(trajectoryIndex, itemIndex);
+                   }));
+
+            
         }
     }
 
@@ -181,7 +191,10 @@ public class TurnManager : MonoBehaviour
         }
         else 
         {
-            OnSetShootingTrajectory(players[currentActivePlayer].ChooseEnemyTrajectory(validTrajectories));
+            StartCoroutine(Delay(AITimeBetweenActions,
+            () => {
+                OnSetShootingTrajectory(players[currentActivePlayer].ChooseEnemyTrajectory(validTrajectories));
+                }));
         }
     }
 
@@ -237,5 +250,13 @@ public class TurnManager : MonoBehaviour
         {
             EditorGUILayout.LabelField(player.playerType.ToString(),player.Points.ToString(), coloredStyle);
         }
+    }
+
+    public IEnumerator Delay(float delay, Action action) 
+    {
+        yield return new WaitForSeconds(delay);
+
+        action?.Invoke();
+        
     }
 }
