@@ -1,9 +1,8 @@
-
+using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
 
 public class HUD : MonoBehaviour
 {
@@ -17,11 +16,13 @@ public class HUD : MonoBehaviour
     public delegate void OnChooseCoin(int index);
     public delegate void OnChooseCoinTrajectory(int trajectoryIndex, int itemIndex);
     public delegate void OnChooseEnemyTrajectory(int trajectoryIndex, int itemIndex);
+    public delegate void OnCoinFlipEnd();
 
     public OnStartGame onStartGame;
     public OnChooseCoin onChooseCoin;
     public OnChooseCoinTrajectory onChooseCoinTrajectory;
     public OnChooseEnemyTrajectory onChooseEnemyTrajectory;
+    public OnCoinFlipEnd onCoinFlipEnd;
 
     CoinType ChoosenCoin;
 
@@ -33,6 +34,9 @@ public class HUD : MonoBehaviour
     [SerializeField] GameObject GamePanel_ref;
     [SerializeField] GameObject OptionsPanel_ref;
     [SerializeField] GameObject ConfirmPanel_ref;
+    [SerializeField] GameObject CoinFacesPanel_ref;
+    [SerializeField] GameObject HeadsPanel_ref;
+    [SerializeField] GameObject TailsPanel_ref;
     [SerializeField] TMP_Text PlayerPointsText_ref;
     [SerializeField] TMP_Text OpponentPointsText_ref;
     [SerializeField] GameObject CoinDifficultyPanel_ref;
@@ -352,5 +356,41 @@ public class HUD : MonoBehaviour
         {
             OpponentPointsText_ref.text = Player.Points.ToString();
         }
+    }
+
+    public void ShowCoinFace(bool isFace)
+    {
+        CoinFacesPanel_ref.SetActive(true);
+
+        if (isFace)
+        {
+            HeadsPanel_ref.SetActive(true);
+            TailsPanel_ref.SetActive(false);
+        }
+        else
+        {
+            HeadsPanel_ref.SetActive(false);
+            TailsPanel_ref.SetActive(true);
+        }
+
+        StartCoroutine(Delay(4f, () =>
+        {
+            HideCoinFace();
+            onCoinFlipEnd?.Invoke();
+        }));
+    }
+
+    public void HideCoinFace()
+    {
+        HeadsPanel_ref.SetActive(false);
+        TailsPanel_ref.SetActive(false);
+        CoinFacesPanel_ref.SetActive(false);
+    }
+
+    public IEnumerator Delay(float delay, Action action)
+    {
+        yield return new WaitForSeconds(delay);
+
+        action?.Invoke();
     }
 }

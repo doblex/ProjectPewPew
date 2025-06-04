@@ -12,6 +12,7 @@ public class TurnManager : MonoBehaviour
     [SerializeField] Coin OxydizedCoin;
     [SerializeField] DummyPlayer dummyPlayer;
     [SerializeField] float AITimeBetweenActions = 2f;
+    [SerializeField] CoinFlipAnimation coinFlipAnimation;
 
     public delegate void OnPlayerChooseCoin();
     public delegate void OnPlayerChooseCoinTrajectory(int trajectoriesCount, Item[] item);
@@ -67,7 +68,7 @@ public class TurnManager : MonoBehaviour
         HUD.Instance.onChooseCoin += OnSetCoin;
         HUD.Instance.onChooseCoinTrajectory += OnSetThrowingTrajectory;
         HUD.Instance.onChooseEnemyTrajectory += OnSetShootingTrajectory;
-
+        HUD.Instance.onCoinFlipEnd += OnFlippedCoin;
 
         TrajectoryManager.Instance.onThrowEnded += OnThrowEnded;
     }
@@ -119,10 +120,15 @@ public class TurnManager : MonoBehaviour
 
     public void ChooseFirstPlayer()
     {
-        //ThrowCoinAnimation
+        coinFlipAnimation.ThrowCoin(() => {
+            currentActivePlayer = Random.Range(0, players.Length);
+            HUD.Instance.ShowCoinFace(players[currentActivePlayer].playerType == PlayerType.PLAYER);
+        });
+    }
 
-        currentActivePlayer = Random.Range(0, players.Length);
-        TurnPhase = TurnPhase.NextPlayer;
+    public void OnFlippedCoin() 
+    { 
+        TurnPhase = TurnPhase.NextPlayer; 
     }
 
     public void OnSetCoin(int index)
@@ -292,6 +298,5 @@ public class TurnManager : MonoBehaviour
         yield return new WaitForSeconds(delay);
 
         action?.Invoke();
-        
     }
 }
