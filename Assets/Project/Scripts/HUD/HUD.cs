@@ -238,7 +238,15 @@ public class HUD : MonoBehaviour
     
     public void EnableTrajectories()
     {
-        ThreeTrajectoriesPanel_ref.GetComponent<TrajectoriesToggle>().enabled = true;
+        if (ThreeTrajectoriesPanel_ref.activeInHierarchy)
+        {
+            ThreeTrajectoriesPanel_ref.GetComponent<TrajectoriesToggle>().enabled = true;
+        }
+        if (TwoTrajectoriesPanel_ref.activeInHierarchy)
+        {
+            TwoTrajectoriesPanel_ref.GetComponent<TrajectoriesToggle>().enabled = true;
+        }
+
     }
 
     public void CloseTrajectoriesPanel()
@@ -269,8 +277,8 @@ public class HUD : MonoBehaviour
             trajectoryIndex = (int)SelectorToggle_ref.trajectoryType;
             itemIndex = -1; //TODO Sistemare items
         }
-         
-        CloseTrajectoriesPanel();
+
+        EnableTrajectories();
         if (isThrowing)
             onChooseCoinTrajectory?.Invoke(trajectoryIndex, itemIndex);
         else

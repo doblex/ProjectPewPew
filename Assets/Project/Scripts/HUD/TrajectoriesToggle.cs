@@ -42,13 +42,10 @@ public class TrajectoriesToggle : MonoBehaviour
         timer += Time.deltaTime;
         if (b_PanelIsOpenig)
         {
-            Debug.LogError("attivato");
             if (!b_PanelIsOpened || !b_SelectorIsRotated)
             {
-                Debug.LogError("apro");
                 if (TrajectorySelector_ref.rotation != OpenedRotation)
                 {
-                    Debug.LogError("ruoto");
                     TrajectorySelector_ref.rotation = Quaternion.Lerp(ClosedRotation, OpenedRotation, timer / OpenPanelTime);
                 }
                 else
@@ -58,12 +55,10 @@ public class TrajectoriesToggle : MonoBehaviour
 
                 if (TrajectoriesPanel_ref.anchoredPosition != TrajectoriesOpenedPanelPosition)
                 {
-                    Debug.LogError("sposto");
                     TrajectoriesPanel_ref.anchoredPosition = Vector2.Lerp(TrajectoriesClosedPanelPosition, TrajectoriesOpenedPanelPosition, timer / OpenPanelTime);
                 }
                 else
                 {
-                    Debug.LogError("finito");
                     b_PanelIsOpened = true;
                 }
             }
@@ -76,10 +71,9 @@ public class TrajectoriesToggle : MonoBehaviour
         {
             if (b_PanelIsOpened || b_SelectorIsRotated)
             {
-                Debug.LogError("chiuso");
                 if (TrajectorySelector_ref.transform.localRotation != ClosedRotation)
                 {
-                    TrajectorySelector_ref.transform.localRotation = Quaternion.Lerp(OpenedRotation, ClosedRotation, OpenPanelTime / timer);
+                    TrajectorySelector_ref.transform.localRotation = Quaternion.Lerp(OpenedRotation, ClosedRotation, timer / OpenPanelTime  );
                 }
                 else
                 {
@@ -88,7 +82,7 @@ public class TrajectoriesToggle : MonoBehaviour
 
                 if (TrajectoriesPanel_ref.anchoredPosition != TrajectoriesClosedPanelPosition)
                 {
-                    TrajectoriesPanel_ref.anchoredPosition = Vector2.Lerp(TrajectoriesOpenedPanelPosition, TrajectoriesClosedPanelPosition, OpenPanelTime / timer);
+                    TrajectoriesPanel_ref.anchoredPosition = Vector2.Lerp(TrajectoriesOpenedPanelPosition, TrajectoriesClosedPanelPosition, timer / OpenPanelTime);
                 }
                 else
                 {
