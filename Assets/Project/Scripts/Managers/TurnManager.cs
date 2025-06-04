@@ -94,12 +94,15 @@ public class TurnManager : MonoBehaviour
             }
             else
             {
-                StartCoroutine(Delay(AITimeBetweenActions,
+                DialogueManager.Instance.StartDialogue(DialogueType.EnemyDifficultySelectionDialogue, () =>
+                {
+                    StartCoroutine(Delay(AITimeBetweenActions,
                     () =>
                     {
                         SetCoin(players[currentActivePlayer].ChooseCoinDifficulty(throwableCoins));
                         PrepareThrow();
                     }));
+                });
             }
         }
     }
@@ -120,42 +123,97 @@ public class TurnManager : MonoBehaviour
         }
     }
 
+    bool isPlayerFirst;
     public void ChooseFirstPlayer()
     {
         coinFlipAnimation.ThrowCoin(() => {
             currentActivePlayer = Random.Range(0, players.Length);
-            HUD.Instance.ShowCoinFace(players[currentActivePlayer].playerType == PlayerType.PLAYER);
+            isPlayerFirst = players[currentActivePlayer].playerType == PlayerType.PLAYER;
+            HUD.Instance.ShowCoinFace(isPlayerFirst);
         });
     }
 
     public void OnFlippedCoin() 
-    { 
-        TurnPhase = TurnPhase.NextPlayer; 
+    {
+        if (isPlayerFirst)
+        {
+            DialogueManager.Instance.StartDialogue(DialogueType.headsDialogue, () =>
+            {
+                TurnPhase = TurnPhase.NextPlayer;
+            });
+        }
+        else
+        {
+            DialogueManager.Instance.StartDialogue(DialogueType.tailsDialogue, () =>
+            {
+                TurnPhase = TurnPhase.NextPlayer;
+            });
+        }
+        
     }
 
     public void OnSetCoin(int index)
     {
+
         SetCoin(index);
         PrepareThrow();
     }
 
     public void NextPlayer()
     {
-        TurnPhase = TurnPhase.NextPlayer;
-        currentActivePlayer = NextPlayerIndex;
-        currentSelectedCoin = -1;
-        isThrowing = false;
+        if (players[currentActivePlayer].playerType == PlayerType.AI)
+        {
+            DialogueManager.Instance.StartDialogue(DialogueType.EnemyEndTurnDialogue, () =>
+            {
+                TurnPhase = TurnPhase.NextPlayer;
+                currentActivePlayer = NextPlayerIndex;
+                currentSelectedCoin = -1;
+                isThrowing = false;
 
-        StartCoroutine(Delay(AITimeBetweenActions,
-                   () =>
-                   {
-                       onTurnEnd?.Invoke(players[currentActivePlayer].playerType);
-                   }));
+                StartCoroutine(Delay(AITimeBetweenActions,
+                           () =>
+                           {
+                               onTurnEnd?.Invoke(players[currentActivePlayer].playerType);
+                           }));
+            });
+        }
+        else 
+        {
+            TurnPhase = TurnPhase.NextPlayer;
+            currentActivePlayer = NextPlayerIndex;
+            currentSelectedCoin = -1;
+            isThrowing = false;
+
+            StartCoroutine(Delay(AITimeBetweenActions,
+                       () =>
+                       {
+                           onTurnEnd?.Invoke(players[currentActivePlayer].playerType);
+                       }));
+        }
     }
 
     public void SetCoin(int index)
     {
-        currentSelectedCoin = index;
+        DialogueType dialogueType = DialogueType.easyThrowDialogue;
+
+        switch (throwableCoins[index].Type)
+        {
+            case CoinType.EASY:
+                dialogueType = DialogueType.easyThrowDialogue;
+                break;
+            case CoinType.MEDIUM:
+                dialogueType = DialogueType.mediumThrowDialogue;
+                break;
+            case CoinType.HARD:
+                dialogueType = DialogueType.difficultThrowDialogue;
+                break;
+        }
+
+        DialogueManager.Instance.StartDialogue(dialogueType, () =>
+        {
+            currentSelectedCoin = index;
+        });
+        
     }
 
     Trajectory[] GetTrajectoriesByCoinDifficulty(Trajectory[] trajectories, CoinType coinType)
@@ -266,17 +324,40 @@ public class TurnManager : MonoBehaviour
     {
         Debug.Log("is Coin Hit? " + hit);
 
-        TurnPhase = TurnPhase.ActivePointAssign;
-
-        int pointsToAward = doublePoints ? throwableCoins[currentSelectedCoin].Points * 2 : throwableCoins[currentSelectedCoin].Points;
-        doublePoints = false;
-
         if (hit)
-            players[currentActivePlayer].AwardPoints(pointsToAward);
+        {
+            DialogueManager.Instance.StartDialogue(DialogueType.failedShootDialogue, () =>
+            {
+                TurnPhase = TurnPhase.ActivePointAssign;
 
-        CheckForWinCondition();
+                int pointsToAward = doublePoints ? throwableCoins[currentSelectedCoin].Points * 2 : throwableCoins[currentSelectedCoin].Points;
+                doublePoints = false;
 
-        NextPlayer();
+                if (hit)
+                    players[currentActivePlayer].AwardPoints(pointsToAward);
+
+                CheckForWinCondition();
+
+                NextPlayer();
+            });
+        }
+        else
+        {
+            DialogueManager.Instance.StartDialogue(DialogueType.succesShootDialogue, () =>
+            {
+                TurnPhase = TurnPhase.ActivePointAssign;
+
+                int pointsToAward = doublePoints ? throwableCoins[currentSelectedCoin].Points * 2 : throwableCoins[currentSelectedCoin].Points;
+                doublePoints = false;
+
+                if (hit)
+                    players[currentActivePlayer].AwardPoints(pointsToAward);
+
+                CheckForWinCondition();
+
+                NextPlayer();
+            });
+        }
     }
 
     private void CheckForWinCondition()
@@ -284,7 +365,20 @@ public class TurnManager : MonoBehaviour
         TurnPhase = TurnPhase.VictoryChecks;
         if (players[currentActivePlayer].Points >= pointsCap)
         {
-            Debug.Log("SOMEONE WINs!!!!!");
+            if (players[currentActivePlayer].playerType == PlayerType.PLAYER)
+            {
+                DialogueManager.Instance.StartDialogue(DialogueType.playerWinDialogue, () =>
+                {
+                    HUD.Instance.ResetScene();
+                });
+            }
+            else
+            {
+                DialogueManager.Instance.StartDialogue(DialogueType.playerLoseDialogue, () =>
+                {
+                    HUD.Instance.ResetScene();
+                });
+            }
         }
     }
 

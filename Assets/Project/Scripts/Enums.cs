@@ -9,3 +9,18 @@ public enum TurnPhase { ActiveCoinSelection, PassiveTrajectorySelection, ActiveT
 public enum ItemUsePhase { ActiveTrajectorySelection, PassiveTrajectorySelection }
 
 public enum ItemType { LuckyBullet, RustyCoin }
+
+public enum DialogueType
+{
+    tailsDialogue,
+    headsDialogue,
+    easyThrowDialogue,
+    mediumThrowDialogue,
+    difficultThrowDialogue,
+    failedShootDialogue,
+    succesShootDialogue,
+    playerWinDialogue,
+    playerLoseDialogue,
+    EnemyDifficultySelectionDialogue,
+    EnemyEndTurnDialogue
+}

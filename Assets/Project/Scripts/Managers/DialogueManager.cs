@@ -1,25 +1,12 @@
+using System;
 using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
 {
-    public enum DialogueType
-    {
-        tailsDialogue,
-        headsDialogue,
-        easyThrowDialogue,
-        mediumThrowDialogue,
-        difficultThrowDialogue,
-        failedShootDialogue,
-        succesShootDialogue,
-        playerWinDialogue,
-        playerLoseDialogue,
-        EnemyDifficultySelectionDialogue,
-        EnemyEndTurnDialogue
-    }
-
-    static DialogueManager Instance;
+    public static DialogueManager Instance;
 
     [SerializeField] DialogueSystem _dialogueSystem;
+    [SerializeField] bool showWarning = true;
 
     [SerializeField] DialogueInfo[] tailsDialogue;
     [SerializeField] DialogueInfo[] headsDialogue;
@@ -45,7 +32,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void StartDialogue(DialogueType dialogueType) 
+    public void StartDialogue(DialogueType dialogueType, Action action = null) 
     {
         DialogueInfo[] dialogue = null;
 
@@ -86,12 +73,19 @@ public class DialogueManager : MonoBehaviour
                 break;
         }
 
-        StartDialogue(dialogue);
+        StartDialogue(dialogue, action);
     }
-    public void StartDialogue(DialogueInfo[] possibleDialogues)
+    public void StartDialogue(DialogueInfo[] possibleDialogues, Action action = null)
     { 
-        int index = Random.Range(0, possibleDialogues.Length);
+        if(possibleDialogues == null || possibleDialogues.Length == 0)
+        {
+            if(showWarning)
+                Debug.LogWarning("No dialogues available.");
+            action?.Invoke();
+            return;
+        }
 
-        _dialogueSystem.StartDialogue(possibleDialogues[index], 0);
+        int index = UnityEngine.Random.Range(0, possibleDialogues.Length);
+        _dialogueSystem.StartDialogue(possibleDialogues[index], 0, action);
     }
 }
