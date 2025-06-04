@@ -134,13 +134,13 @@ MonoBehaviour:
   type: 1
   points: 1
   shineStart: 0
-  duration: 0.1
+  duration: 0.5
   isOxydated: 0
-  shiningEffect: {fileID: 0}
-  skinnedMesh: {fileID: 0}
+  shiningEffect: {fileID: 5173109244127249284}
+  skinnedMesh: {fileID: 6038277996625979964}
   multiplier: 1.5
-  launchDelay: 0
-  aIHitProbability: 0
+  launchDelay: 1
+  aIHitProbability: 40
 --- !u!1001 &1855962555802612270
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -252,5 +252,10 @@ PrefabInstance:
 --- !u!4 &2182853154817119685 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 54572e2aa2da0b64fa4edc0eb24a34f6, type: 3}
+  m_PrefabInstance: {fileID: 1855962555802612270}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &6038277996625979964 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -3887185075125053422, guid: 54572e2aa2da0b64fa4edc0eb24a34f6, type: 3}
   m_PrefabInstance: {fileID: 1855962555802612270}
   m_PrefabAsset: {fileID: 0}
