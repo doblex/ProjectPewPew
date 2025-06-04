@@ -103,13 +103,18 @@ public class TurnManager : MonoBehaviour
 
     void OnStartGame() 
     {
-        ChooseFirstPlayer();
-    }
-
-    public void OnSetCoin(int index)
-    {
-        SetCoin(index);
-        PrepareThrow();
+        for (int i = 0; i < players.Length; i++)
+        {
+            if (players[i].playerType == PlayerType.AI)
+            {
+                ((AI)players[i]).Animator.SetTrigger("trTakeCoins");
+                ((AI)players[i]).GetComponent<AnimationController>().onEndGrabAnimation += () =>
+                {
+                    ChooseFirstPlayer();
+                };
+                break;
+            }
+        }
     }
 
     public void ChooseFirstPlayer()
@@ -118,6 +123,12 @@ public class TurnManager : MonoBehaviour
 
         currentActivePlayer = Random.Range(0, players.Length);
         TurnPhase = TurnPhase.NextPlayer;
+    }
+
+    public void OnSetCoin(int index)
+    {
+        SetCoin(index);
+        PrepareThrow();
     }
 
     public void NextPlayer()
@@ -264,6 +275,7 @@ public class TurnManager : MonoBehaviour
     {
         GUIStyle coloredStyle = new GUIStyle(EditorStyles.label);
         coloredStyle.normal.textColor = Color.black;
+        coloredStyle.fontSize = 30;
 
         EditorGUILayout.LabelField(TurnPhase.ToString(), coloredStyle);
         EditorGUILayout.LabelField(currentActivePlayer.ToString(), coloredStyle);
@@ -271,7 +283,7 @@ public class TurnManager : MonoBehaviour
 
         foreach (var player in players)
         {
-            EditorGUILayout.LabelField(player.playerType.GetType().ToString(),player.Points.ToString(), coloredStyle);
+            EditorGUILayout.LabelField(player.playerType.ToString(),player.Points.ToString(), coloredStyle);
         }
     }
 

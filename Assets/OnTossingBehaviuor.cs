@@ -4,13 +4,13 @@ public class OnTossingBehaviuor : StateMachineBehaviour
 {
     [SerializeField] float tossDelay;
 
-    AI AI;
+    AnimationController animationController;
 
     float timer = 0;
     bool effectPlayed = false;
     public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
-        AI = animator.gameObject.GetComponentInParent<AI>();
+        animationController = animator.gameObject.GetComponentInParent<AnimationController>();
         timer = 0;
         effectPlayed = false;
     }
@@ -19,7 +19,7 @@ public class OnTossingBehaviuor : StateMachineBehaviour
     {
         if (timer >= tossDelay && !effectPlayed)
         {
-            AI.Throw();
+            animationController.Throw();
             effectPlayed = true;
         }
 
