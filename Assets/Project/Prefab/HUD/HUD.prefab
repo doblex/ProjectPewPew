@@ -798,6 +798,8 @@ MonoBehaviour:
   GamePanel_ref: {fileID: 1390666531055852912}
   OptionsPanel_ref: {fileID: 1267983405576675633}
   ConfirmPanel_ref: {fileID: 63148194656413881}
+  PlayerPointsText_ref: {fileID: 7641513289375716050}
+  OpponentPointsText_ref: {fileID: 6423468179269472731}
   CoinDifficultyPanel_ref: {fileID: 3210687539838485067}
   TrajectoriesPanel_ref: {fileID: 6589487620006500608}
   TwoTrajectoriesPanel_ref: {fileID: 6635031557609948222}
@@ -1061,7 +1063,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: OpponentPoints
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6941,7 +6943,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: PlayerPoints
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

@@ -1,4 +1,5 @@
 
+using TMPro;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement;
@@ -32,6 +33,8 @@ public class HUD : MonoBehaviour
     [SerializeField] GameObject GamePanel_ref;
     [SerializeField] GameObject OptionsPanel_ref;
     [SerializeField] GameObject ConfirmPanel_ref;
+    [SerializeField] TMP_Text PlayerPointsText_ref;
+    [SerializeField] TMP_Text OpponentPointsText_ref;
     [SerializeField] GameObject CoinDifficultyPanel_ref;
     [SerializeField] GameObject TrajectoriesPanel_ref;
     [SerializeField] GameObject TwoTrajectoriesPanel_ref;
@@ -74,6 +77,10 @@ public class HUD : MonoBehaviour
         TurnManager.Instance.onPlayerChooseCoin += OpenCoinPanel;
         TurnManager.Instance.onPlayerChooseCoinTrajectory += OpenTrajectoriesPanelForThrowing;
         TurnManager.Instance.onPlayerChooseEnemyTrajectory += OpenTrajectoriesPanelForShooting;
+        foreach (PG Player in TurnManager.Instance.Players)
+        {
+            Player.onPlayerPointsChanged += UpdatePoints;
+        }
 
         //TODO Attaccarsi ai player;
     }
@@ -335,4 +342,15 @@ public class HUD : MonoBehaviour
         }
     }
 
+    public void UpdatePoints(PG Player)
+    {
+        if (Player.playerType == PlayerType.PLAYER)
+        {
+            PlayerPointsText_ref.text = Player.Points.ToString();
+        }
+        else
+        {
+            OpponentPointsText_ref.text = Player.Points.ToString();
+        }
+    }
 }
