@@ -213,13 +213,15 @@ public class HUD : MonoBehaviour
         }
         else
         {
+            if (TrajectoriesQuantity == 1)
+            { 
+                OnConfirmTrajectory(false);
+                return;
+            }
+
             TrajectoriesPanel_ref.SetActive(true);
             switch (TrajectoriesQuantity)
             {
-                case 1:
-                    OnConfirmTrajectory(false);
-                    break;
-
                 case 2:
                     TwoTrajectoriesPanel_ref.SetActive(true);
                     SelectorToggle_ref = TwoTrajectoriesPanel_ref.transform.Find("SelectorCenter").GetComponent<SelectorToggle>();
@@ -279,10 +281,15 @@ public class HUD : MonoBehaviour
         }
 
         EnableTrajectories();
+
         if (isThrowing)
+        {
             onChooseCoinTrajectory?.Invoke(trajectoryIndex, itemIndex);
+        }
         else
+        { 
             onChooseEnemyTrajectory?.Invoke(trajectoryIndex, itemIndex);
+        }
     }
 
     public void ChooseTrajectory(int TrajectoryIndex)

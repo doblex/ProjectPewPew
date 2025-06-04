@@ -127,7 +127,11 @@ public class TurnManager : MonoBehaviour
         currentSelectedCoin = -1;
         isThrowing = false;
 
-        onTurnEnd?.Invoke(players[currentActivePlayer].playerType);
+        StartCoroutine(Delay(AITimeBetweenActions,
+                   () =>
+                   {
+                       onTurnEnd?.Invoke(players[currentActivePlayer].playerType);
+                   }));
     }
 
     public void SetCoin(int index)
@@ -229,6 +233,7 @@ public class TurnManager : MonoBehaviour
         }
         else
         {
+            Debug.Log("Failed Trajectory");
             OnThrowEnded(false);
         }
     }
@@ -258,7 +263,7 @@ public class TurnManager : MonoBehaviour
     private void OnGUI()
     {
         GUIStyle coloredStyle = new GUIStyle(EditorStyles.label);
-        coloredStyle.normal.textColor = Color.white;
+        coloredStyle.normal.textColor = Color.black;
 
         EditorGUILayout.LabelField(TurnPhase.ToString(), coloredStyle);
         EditorGUILayout.LabelField(currentActivePlayer.ToString(), coloredStyle);
@@ -266,7 +271,7 @@ public class TurnManager : MonoBehaviour
 
         foreach (var player in players)
         {
-            EditorGUILayout.LabelField(player.playerType.ToString(),player.Points.ToString(), coloredStyle);
+            EditorGUILayout.LabelField(player.playerType.GetType().ToString(),player.Points.ToString(), coloredStyle);
         }
     }
 

@@ -41,6 +41,6 @@ public abstract class PG : MonoBehaviour
     public abstract int ChooseEnemyTrajectory(Trajectory[] trajectories);
     protected abstract void CheckForThrow();
     protected abstract void CheckForShoot();
-    public void Throw() { onPlayerThrow?.Invoke(this); }
+    public void Throw() { CanTrow = false; onPlayerThrow?.Invoke(this); }
     public virtual void Shoot() { onPlayerShoot?.Invoke(this); }
 }

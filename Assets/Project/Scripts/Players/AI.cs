@@ -41,6 +41,7 @@ public class AI : PG
         if (coinTimer <= 0 && CanTrow)
         {
             animator.SetTrigger("trTossCoin");
+            CanTrow = false;
         }
 
         coinTimer -= Time.deltaTime;
