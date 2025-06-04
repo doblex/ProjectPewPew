@@ -12,6 +12,12 @@ public class TrajectoryManager : MonoBehaviour
     public static TrajectoryManager Instance;
 
     [SerializeField] float duration = 2.0f;
+    [Header("Sounds")]
+    [SerializeField] AudioClip throwSound;
+    [SerializeField] AudioClip hitSound;
+    [SerializeField] AudioClip missSound;
+
+    AudioSource audioSource;
 
     PG currentShootingPlayer;
     Coin currentCoinTrowed;
@@ -30,6 +36,8 @@ public class TrajectoryManager : MonoBehaviour
         {
             Instance = this;
         }
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void SpawnCoin(PG shootingPlayer, PG throwingPlayer, Trajectory trajectory, Coin coin)
@@ -53,7 +61,7 @@ public class TrajectoryManager : MonoBehaviour
     {
         p.onPlayerThrow -= OnThrow;
         p.CanTrow = false;
-
+        audioSource.PlayOneShot(throwSound);
         StartCoroutine(MoveOnTrajectory(trajectory.Spline));
         TurnManager.Instance.TurnPhase = TurnPhase.ActiveQuickTimeEvent;
     }
@@ -63,9 +71,15 @@ public class TrajectoryManager : MonoBehaviour
         p.onPlayerShoot -= OnShoot;
         if (isShining)
         {
+            audioSource.PlayOneShot(hitSound);
             currentCoinTrowed.Hit();
             isHit = true;
         }
+        else
+        { 
+            audioSource.PlayOneShot(missSound);
+        }
+
         p.CanShoot = false;
 
         if (p.playerType == PlayerType.AI)
