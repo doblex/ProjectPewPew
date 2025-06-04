@@ -15,7 +15,7 @@ public class HUD : MonoBehaviour
     public delegate void OnStartGame();
     public delegate void OnChooseCoin(int index);
     public delegate void OnChooseCoinTrajectory(int trajectoryIndex, int itemIndex);
-    public delegate void OnChooseEnemyTrajectory();
+    public delegate void OnChooseEnemyTrajectory(int trajectoryIndex, int itemIndex);
 
     public OnStartGame onStartGame;
     public OnChooseCoin onChooseCoin;
@@ -53,6 +53,8 @@ public class HUD : MonoBehaviour
 
     GameObject ActualHittedObject;
 
+    bool isThrowing = true;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -70,8 +72,8 @@ public class HUD : MonoBehaviour
         DialogueSystem_ref = gameObject.GetComponent<DialogueSystem>();
         TurnManager.Instance.onTurnEnd += ToggleTurnIndicatorPosition;
         TurnManager.Instance.onPlayerChooseCoin += OpenCoinPanel;
-        TurnManager.Instance.onPlayerChooseCoinTrajectory += OpenTrajectoriesPanel;
-        TurnManager.Instance.onPlayerChooseEnemyTrajectory += OpenTrajectoriesPanel;
+        TurnManager.Instance.onPlayerChooseCoinTrajectory += OpenTrajectoriesPanelForThrowing;
+        TurnManager.Instance.onPlayerChooseEnemyTrajectory += OpenTrajectoriesPanelForShooting;
 
         //TODO Attaccarsi ai player;
     }
@@ -191,7 +193,18 @@ public class HUD : MonoBehaviour
         onChooseCoin?.Invoke(coinType);
     }
 
-    public void OpenTrajectoriesPanel(int TrajectoriesQuantity, Item[] items)
+    public void OpenTrajectoriesPanelForThrowing(int TrajectoriesQuantity, Item[] items) 
+    {
+        isThrowing = true;
+        OnOpenTrajectoriesPanel(TrajectoriesQuantity, items);
+    }
+    public void OpenTrajectoriesPanelForShooting(int TrajectoriesQuantity, Item[] items) 
+    {
+        isThrowing = false;
+        OnOpenTrajectoriesPanel(TrajectoriesQuantity, items);
+    }
+
+    private void OnOpenTrajectoriesPanel(int TrajectoriesQuantity, Item[] items)
     {
         //TODO ITEMS
         if (TrajectoriesQuantity < MinNumberOfTrajectories || TrajectoriesQuantity > MaxNumberOfTrajectories)
@@ -258,7 +271,10 @@ public class HUD : MonoBehaviour
         }
          
         CloseTrajectoriesPanel();
-        onChooseCoinTrajectory?.Invoke(trajectoryIndex, itemIndex);
+        if (isThrowing)
+            onChooseCoinTrajectory?.Invoke(trajectoryIndex, itemIndex);
+        else
+            onChooseEnemyTrajectory?.Invoke(trajectoryIndex, itemIndex);
     }
 
     public void ChooseTrajectory(int TrajectoryIndex)

@@ -802,6 +802,18 @@ PrefabInstance:
       propertyPath: 'players.Array.data[1]'
       value: 
       objectReference: {fileID: 1393585541}
+    - target: {fileID: 9063137086632411969, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
+      propertyPath: throwableCoins.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9063137086632411969, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
+      propertyPath: 'throwableCoins.Array.data[1]'
+      value: 
+      objectReference: {fileID: 5284052278846036475, guid: 9f81e9d5654df7744a92f8b65aa2df1f, type: 3}
+    - target: {fileID: 9063137086632411969, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
+      propertyPath: 'throwableCoins.Array.data[2]'
+      value: 
+      objectReference: {fileID: 5284052278846036475, guid: 9f55967194508b14cbc3c220b5e78fec, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1353,7 +1365,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3210687539838485067, guid: d1aa63290a8d3c848aede137dadff58a, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3646655739399732592, guid: d1aa63290a8d3c848aede137dadff58a, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1685,7 +1697,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8390434870006693747, guid: d1aa63290a8d3c848aede137dadff58a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8896299497013816093, guid: d1aa63290a8d3c848aede137dadff58a, type: 3}
       propertyPath: m_AnchorMax.x
