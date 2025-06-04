@@ -1,11 +1,11 @@
 using UnityEngine;
-using static UnityEditor.Progress;
-
 
 public class Player : PG
 {
     [SerializeField] KeyCode ThrowKey;
     [SerializeField] KeyCode ShootKey;
+
+    [SerializeField] ParticleSystem ParticleSystem;
 
     public Player()
     {
@@ -47,6 +47,7 @@ public class Player : PG
         if (Input.GetKeyDown(ShootKey) && CanShoot)
         {
             Shoot();
+            ParticleSystem.Play();
         }
     }
 }

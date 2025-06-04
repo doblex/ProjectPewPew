@@ -31,6 +31,11 @@ public class Coin : MonoBehaviour
         Shine(false);
     }
 
+    public void Update()
+    {
+        transform.Rotate(360f * 2 * Time.deltaTime, 0f , 360f * 2 * Time.deltaTime);
+    }
+
     public void Shine(bool isShining)
     {
         if (shiningEffect != null)

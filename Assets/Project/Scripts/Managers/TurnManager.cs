@@ -13,6 +13,7 @@ public class TurnManager : MonoBehaviour
     [SerializeField] DummyPlayer dummyPlayer;
     [SerializeField] float AITimeBetweenActions = 2f;
     [SerializeField] CoinFlipAnimation coinFlipAnimation;
+    [SerializeField] bool debugMode = false;
 
     public delegate void OnPlayerChooseCoin();
     public delegate void OnPlayerChooseCoinTrajectory(int trajectoriesCount, Item[] item);
@@ -279,18 +280,21 @@ public class TurnManager : MonoBehaviour
 
     private void OnGUI()
     {
-        GUIStyle coloredStyle = new GUIStyle(EditorStyles.label);
-        coloredStyle.normal.textColor = Color.black;
-        coloredStyle.fontSize = 30;
+        if (debugMode)
+        {
+            GUIStyle coloredStyle = new GUIStyle(EditorStyles.label);
+            coloredStyle.normal.textColor = Color.black;
+            coloredStyle.fontSize = 30;
 
-        EditorGUILayout.LabelField(TurnPhase.ToString(), coloredStyle);
-        EditorGUILayout.LabelField(currentActivePlayer.ToString(), coloredStyle);
+            EditorGUILayout.LabelField(TurnPhase.ToString(), coloredStyle);
+            EditorGUILayout.LabelField(currentActivePlayer.ToString(), coloredStyle);
 
 
-        //foreach (var player in players)
-        //{
-        //    EditorGUILayout.LabelField(player.playerType.ToString(),player.Points.ToString(), coloredStyle);
-        //}
+            //foreach (var player in players)
+            //{
+            //    EditorGUILayout.LabelField(player.playerType.ToString(),player.Points.ToString(), coloredStyle);
+            //}
+        }
     }
 
     public IEnumerator Delay(float delay, Action action) 
