@@ -3,6 +3,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class HUD : MonoBehaviour
 {
@@ -28,7 +29,7 @@ public class HUD : MonoBehaviour
 
     [SerializeField, Header("Info"), Space(10f)] bool b_IsOptionsPanelOpen;
     [SerializeField] bool b_IsChooseInitialPlayerPanelOpen;
-    [SerializeField] public bool b_IsTrajectoriesPanelOpen;
+    [SerializeField] bool b_IsTrajectoriesPanelOpen;
 
     [SerializeField, Header("Setup HUD"), Space(10f)] GameObject StartMenuPanel_ref;
     [SerializeField] GameObject GamePanel_ref;
@@ -40,7 +41,15 @@ public class HUD : MonoBehaviour
     [SerializeField] TMP_Text PlayerPointsText_ref;
     [SerializeField] TMP_Text OpponentPointsText_ref;
     [SerializeField] GameObject CoinDifficultyPanel_ref;
-    [SerializeField] GameObject TrajectoriesPanel_ref;
+
+    [SerializeField, Header("Setup Skills"), Space(10f)] GameObject SkillsPanel_ref;
+    [SerializeField] Toggle Skill1Toggle_ref;
+    [SerializeField] Toggle Skill2Toggle_ref;
+    [SerializeField] Button SkillCofirmButton_ref;
+    Item[] ActualItems;
+    bool b_IsSkillConfirmButtonHide = true;
+
+    [SerializeField, Header("Setup Trajectories"), Space(10f)] GameObject TrajectoriesPanel_ref;
     [SerializeField] GameObject TwoTrajectoriesPanel_ref;
     [SerializeField] GameObject ThreeTrajectoriesPanel_ref;
     [SerializeField] int MinNumberOfTrajectories;
@@ -51,12 +60,9 @@ public class HUD : MonoBehaviour
     [SerializeField] Vector3 PlayerTurnIdicatorPosition;
     [SerializeField] Vector3 IATurnIdicatorPosition;
 
-    DialogueSystem DialogueSystem_ref;
-
     [SerializeField, Header("Setup Dialogue"), Space(10f)] DialogueInfo StartDialogueInfo_ref;
-
-    float timer;
     [SerializeField] float DelayPassDialogue;
+    DialogueSystem DialogueSystem_ref;
 
     GameObject ActualHittedObject;
 
@@ -76,6 +82,7 @@ public class HUD : MonoBehaviour
 
     void Start()
     {
+        b_IsSkillConfirmButtonHide = true;
         DialogueSystem_ref = gameObject.GetComponent<DialogueSystem>();
         TurnManager.Instance.onTurnEnd += ToggleTurnIndicatorPosition;
         TurnManager.Instance.onPlayerChooseCoin += OpenCoinPanel;
@@ -392,5 +399,59 @@ public class HUD : MonoBehaviour
         yield return new WaitForSeconds(delay);
 
         action?.Invoke();
+    }
+
+    private void EnableSkills(Item[] Items)
+    {
+        ActualItems = Items;
+        if (!Items[0].isUsed)
+        {
+            Skill1Toggle_ref.interactable = true;
+        }
+
+        if (!Items[1].isUsed)
+        {
+            Skill2Toggle_ref.interactable = true;
+        }
+    }
+    private void DisableSkills()
+    {
+        Skill1Toggle_ref.interactable = false;
+        Skill2Toggle_ref.interactable = false;
+    }
+
+    public void ToggleSkillConfimButton()
+    {
+        if (b_IsSkillConfirmButtonHide)
+        {
+            if (Skill1Toggle_ref.isOn || Skill2Toggle_ref.isOn)
+            {
+                SkillCofirmButton_ref.gameObject.SetActive(true);
+                b_IsSkillConfirmButtonHide = false;
+            }
+        }
+        else
+        {
+            if (Skill1Toggle_ref.isOn && Skill2Toggle_ref.isOn)
+            {
+                SkillCofirmButton_ref.gameObject.SetActive(false);
+                b_IsSkillConfirmButtonHide = true;
+            }
+        }
+    }
+
+    public void ConfirmSkill()
+    {
+
+        if (Skill1Toggle_ref.isOn)
+        {
+            ActualItems[0].isUsed = true;
+        }
+        if (Skill2Toggle_ref.isOn)
+        {
+            ActualItems[1].isUsed = true;
+        }
+        SkillCofirmButton_ref.gameObject.SetActive(false);
+        b_IsSkillConfirmButtonHide = true;
     }
 }
