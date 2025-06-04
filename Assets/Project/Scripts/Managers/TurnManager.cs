@@ -36,6 +36,7 @@ public class TurnManager : MonoBehaviour
     [SerializeField] int currentActivePlayer = -1;
     [SerializeField] int currentSelectedCoin = -1;
 
+    bool doublePoints;
     bool isThrowing = false;
     Trajectory[] validTrajectories;
 
@@ -240,6 +241,11 @@ public class TurnManager : MonoBehaviour
 
     public void OnSetShootingTrajectory(int shootingTrajectoryIndex, int itemIndex = -1) 
     {
+        if (itemIndex == 0)
+        {
+            doublePoints = true;
+        }
+
         if (validTrajectories[shootingTrajectoryIndex] == validTrajectories[gTrajectoryIndex])
         {
             if (currentSelectedCoin >= 0)
@@ -261,8 +267,12 @@ public class TurnManager : MonoBehaviour
         Debug.Log("is Coin Hit? " + hit);
 
         TurnPhase = TurnPhase.ActivePointAssign;
-        if(hit)
-            players[currentActivePlayer].AwardPoints(throwableCoins[currentSelectedCoin].Points);
+
+        int pointsToAward = doublePoints ? throwableCoins[currentSelectedCoin].Points * 2 : throwableCoins[currentSelectedCoin].Points;
+        doublePoints = false;
+
+        if (hit)
+            players[currentActivePlayer].AwardPoints(pointsToAward);
 
         CheckForWinCondition();
 
