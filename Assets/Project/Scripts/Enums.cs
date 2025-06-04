@@ -24,3 +24,5 @@ public enum DialogueType
     EnemyDifficultySelectionDialogue,
     EnemyEndTurnDialogue
 }
+
+public enum CommandType {none, shoot, flip }

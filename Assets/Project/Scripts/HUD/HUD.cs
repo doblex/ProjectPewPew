@@ -34,6 +34,9 @@ public class HUD : MonoBehaviour
     [SerializeField, Header("Setup HUD"), Space(10f)] GameObject StartMenuPanel_ref;
     [SerializeField] GameObject GamePanel_ref;
     [SerializeField] GameObject OptionsPanel_ref;
+    [SerializeField] GameObject IconsPanel_ref;
+    [SerializeField] GameObject ShootPanel_ref;
+    [SerializeField] GameObject ThrowPanel_ref;
     [SerializeField] GameObject ConfirmPanel_ref;
     [SerializeField] GameObject CoinFacesPanel_ref;
     [SerializeField] GameObject HeadsPanel_ref;
@@ -453,5 +456,26 @@ public class HUD : MonoBehaviour
         }
         SkillCofirmButton_ref.gameObject.SetActive(false);
         b_IsSkillConfirmButtonHide = true;
+    }
+
+    public void ShowCommand(CommandType commandType = CommandType.none)
+    {
+
+        IconsPanel_ref.SetActive(true);
+
+        switch (commandType)
+        {
+            case CommandType.shoot:
+                ShootPanel_ref.SetActive(true);
+                break;
+            case CommandType.flip:
+                ThrowPanel_ref.SetActive(true);
+                break;
+            case CommandType.none:
+                ShootPanel_ref.SetActive(false);
+                ThrowPanel_ref.SetActive(false);
+                IconsPanel_ref.SetActive(false);
+                break;
+        }
     }
 }

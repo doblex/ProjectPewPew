@@ -306,6 +306,7 @@ public class TurnManager : MonoBehaviour
 
         if (validTrajectories[shootingTrajectoryIndex] == validTrajectories[gTrajectoryIndex])
         {
+            HUD.Instance.ShowCommand(players[currentActivePlayer].playerType == PlayerType.PLAYER ? CommandType.shoot : CommandType.flip);
             if (currentSelectedCoin >= 0)
                 TrajectoryManager.Instance.SpawnCoin(players[currentActivePlayer], players[NextPlayerIndex], validTrajectories[shootingTrajectoryIndex], throwableCoins[currentSelectedCoin]);
             else
@@ -323,6 +324,8 @@ public class TurnManager : MonoBehaviour
     private void OnThrowEnded(bool hit)
     {
         Debug.Log("is Coin Hit? " + hit);
+
+        HUD.Instance.ShowCommand();
 
         if (hit)
         {
