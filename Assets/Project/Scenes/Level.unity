@@ -1504,6 +1504,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 702170751}
     - target: {fileID: 5208884030484077168, guid: d1aa63290a8d3c848aede137dadff58a, type: 3}
+      propertyPath: MinNumberOfTrajectories
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5208884030484077168, guid: d1aa63290a8d3c848aede137dadff58a, type: 3}
       propertyPath: objectsLayermask.m_Bits
       value: 64
       objectReference: {fileID: 0}
