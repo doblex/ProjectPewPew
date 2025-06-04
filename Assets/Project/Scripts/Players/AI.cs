@@ -3,8 +3,12 @@ using UnityEngine;
 public class AI : PG
 {
     [SerializeField] Animator animator;
-
+    [SerializeField] GameObject weapon;
+    [SerializeField] ParticleSystem effect;
     float coinTimer = 0;
+
+    public GameObject Weapon { get => weapon; }
+    public ParticleSystem Effect { get => effect; }
 
     public AI ()
     {
@@ -55,6 +59,8 @@ public class AI : PG
 
     public override void Shoot()
     {
+        weapon.SetActive(true);
+
         base.Shoot();
         animator.SetTrigger("trShoot");
     }
