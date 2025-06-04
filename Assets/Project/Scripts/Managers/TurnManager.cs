@@ -63,12 +63,13 @@ public class TurnManager : MonoBehaviour
             dummyPlayer.onChooseShootingTrajectoryEnded += OnSetShootingTrajectory;
         }
 
-        TrajectoryManager.Instance.onThrowEnded += OnThrowEnded;
         HUD.Instance.onStartGame += OnStartGame;
         HUD.Instance.onChooseCoin += OnSetCoin;
         HUD.Instance.onChooseCoinTrajectory += OnSetThrowingTrajectory;
         HUD.Instance.onChooseEnemyTrajectory += OnSetShootingTrajectory;
-       
+
+
+        TrajectoryManager.Instance.onThrowEnded += OnThrowEnded;
     }
 
     private void Update()

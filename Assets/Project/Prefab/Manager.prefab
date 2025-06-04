@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OxydizedCoin: {fileID: 5284052278846036475, guid: bf5743cafc45b0e4a8538ebfbaeb36bd, type: 3}
-  dummyPlayer: {fileID: 3784635093630135469}
+  dummyPlayer: {fileID: 0}
   AITimeBetweenActions: 2
   pointsCap: 20
   players:
@@ -69,6 +69,8 @@ MonoBehaviour:
   - {fileID: 0}
   throwableCoins:
   - {fileID: 5284052278846036475, guid: 0341ff9d6aaab804ba723b4826cbb878, type: 3}
+  - {fileID: 5284052278846036475, guid: 9f81e9d5654df7744a92f8b65aa2df1f, type: 3}
+  - {fileID: 5284052278846036475, guid: 9f55967194508b14cbc3c220b5e78fec, type: 3}
   itemManager:
     items: []
   TurnPhase: 0
