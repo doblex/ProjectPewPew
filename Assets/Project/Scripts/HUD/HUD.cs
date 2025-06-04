@@ -253,7 +253,6 @@ public class HUD : MonoBehaviour
 
     public void CloseTrajectoriesPanel()
     {
-        TrajectoriesPanel_ref.SetActive(false);
         if (TwoTrajectoriesPanel_ref.activeInHierarchy)
         {
             TwoTrajectoriesPanel_ref.SetActive(false);
@@ -262,6 +261,7 @@ public class HUD : MonoBehaviour
         {
             ThreeTrajectoriesPanel_ref.SetActive(false);
         }
+        TrajectoriesPanel_ref.SetActive(false);
     }
 
     public void ConfirmTrajectory() 
