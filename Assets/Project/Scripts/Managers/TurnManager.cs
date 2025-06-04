@@ -281,10 +281,10 @@ public class TurnManager : MonoBehaviour
         EditorGUILayout.LabelField(currentActivePlayer.ToString(), coloredStyle);
 
 
-        foreach (var player in players)
-        {
-            EditorGUILayout.LabelField(player.playerType.ToString(),player.Points.ToString(), coloredStyle);
-        }
+        //foreach (var player in players)
+        //{
+        //    EditorGUILayout.LabelField(player.playerType.ToString(),player.Points.ToString(), coloredStyle);
+        //}
     }
 
     public IEnumerator Delay(float delay, Action action) 
