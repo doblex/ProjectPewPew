@@ -69,7 +69,7 @@ MonoBehaviour:
   AITimeBetweenActions: 2
   coinFlipAnimation: {fileID: 0}
   debugMode: 0
-  pointsCap: 20
+  pointsCap: 10
   players:
   - {fileID: 0}
   - {fileID: 0}
@@ -118,17 +118,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dialogueSystem: {fileID: 0}
   showWarning: 0
-  tailsDialogue: []
-  headsDialogue: []
-  easyThrowDialogue: []
-  mediumThrowDialogue: []
-  difficultThrowDialogue: []
-  failedShootDialogue: []
-  succesShootDialogue: []
-  playerWinDialogue: []
-  playerLoseDialogue: []
-  EnemyDifficultySelectionDialogue: []
-  EnemyEndTurnDialogue: []
+  tailsDialogue:
+  - {fileID: 0}
+  headsDialogue:
+  - {fileID: 0}
+  easyThrowDialogue:
+  - {fileID: 0}
+  mediumThrowDialogue:
+  - {fileID: 0}
+  difficultThrowDialogue:
+  - {fileID: 0}
+  failedShootDialogue:
+  - {fileID: 0}
+  succesShootDialogue:
+  - {fileID: 0}
+  playerWinDialogue:
+  - {fileID: 0}
+  playerLoseDialogue:
+  - {fileID: 0}
+  EnemyDifficultySelectionDialogue:
+  - {fileID: 0}
+  EnemyEndTurnDialogue:
+  - {fileID: 0}
 --- !u!114 &4860797463728310522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,7 +162,7 @@ AudioSource:
   m_GameObject: {fileID: 3069578678304491984}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: 9bd44c340258edf409f572d15d3a3078, type: 2}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: b5ecc6c928a480244a9532c6df13e91a, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
@@ -248,13 +259,13 @@ AudioSource:
   m_GameObject: {fileID: 3069578678304491984}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 9bd44c340258edf409f572d15d3a3078, type: 2}
+  m_audioClip: {fileID: 8300000, guid: 280757a3b3aa56b4abcd1b1c910e6485, type: 3}
+  m_Resource: {fileID: 8300000, guid: 280757a3b3aa56b4abcd1b1c910e6485, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
