@@ -49,7 +49,8 @@ public class HUD : MonoBehaviour
     [SerializeField] Toggle Skill1Toggle_ref;
     [SerializeField] Toggle Skill2Toggle_ref;
     [SerializeField] Button SkillCofirmButton_ref;
-    Item[] ActualItems;
+    Item[] AvailableItems;
+    int ActualUsedItemIndex;
     bool b_IsSkillConfirmButtonHide = true;
 
     [SerializeField, Header("Setup Trajectories"), Space(10f)] GameObject TrajectoriesPanel_ref;
@@ -227,7 +228,7 @@ public class HUD : MonoBehaviour
 
     private void OnOpenTrajectoriesPanel(int TrajectoriesQuantity, Item[] items)
     {
-        //TODO ITEMS
+        EnableSkills(items);
         if (TrajectoriesQuantity < MinNumberOfTrajectories || TrajectoriesQuantity > MaxNumberOfTrajectories)
         {
             Debug.LogError("Quantità traiettorie invalida");
@@ -283,6 +284,7 @@ public class HUD : MonoBehaviour
             ThreeTrajectoriesPanel_ref.SetActive(false);
         }
         TrajectoriesPanel_ref.SetActive(false);
+        DisableSkills();
     }
 
     public void ConfirmTrajectory() 
@@ -298,7 +300,23 @@ public class HUD : MonoBehaviour
         if (isSelected)
         {
             trajectoryIndex = (int)SelectorToggle_ref.trajectoryType;
-            itemIndex = -1; //TODO Sistemare items
+            if (ActualUsedItemIndex == 0)
+            {
+                Debug.LogError("E'stato scelto l'oggetto 0");
+                itemIndex = 0;
+                ActualUsedItemIndex = -1;
+            }
+            else if(ActualUsedItemIndex == 1)
+            {
+                Debug.LogError("E'stato scelto l'oggetto 1");
+                itemIndex = 1;
+                ActualUsedItemIndex = -1;
+            }
+            else
+            {
+                Debug.LogError("Non è stato scelto alcun oggetto");
+                itemIndex = -1;
+            }
         }
 
         EnableTrajectories();
@@ -406,13 +424,13 @@ public class HUD : MonoBehaviour
 
     private void EnableSkills(Item[] Items)
     {
-        ActualItems = Items;
-        if (!Items[0].isUsed)
+        AvailableItems = Items;
+        if (!AvailableItems[0].isUsed && isThrowing)
         {
             Skill1Toggle_ref.interactable = true;
         }
 
-        if (!Items[1].isUsed)
+        if (!AvailableItems[1].isUsed && !isThrowing)
         {
             Skill2Toggle_ref.interactable = true;
         }
@@ -448,11 +466,13 @@ public class HUD : MonoBehaviour
 
         if (Skill1Toggle_ref.isOn)
         {
-            ActualItems[0].isUsed = true;
+            AvailableItems[0].isUsed = true;
+            ActualUsedItemIndex = 0;
         }
         if (Skill2Toggle_ref.isOn)
         {
-            ActualItems[1].isUsed = true;
+            AvailableItems[1].isUsed = true;
+            ActualUsedItemIndex = 1;
         }
         SkillCofirmButton_ref.gameObject.SetActive(false);
         b_IsSkillConfirmButtonHide = true;
