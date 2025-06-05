@@ -149,7 +149,84 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 702170750}
+  - {fileID: 332396402}
+  - {fileID: 2018858963}
+  - {fileID: 1117634267}
+  - {fileID: 1433914682}
+  - {fileID: 1158588507}
+  - {fileID: 2092320398}
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &332396400
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 332396402}
+  - component: {fileID: 332396401}
+  m_Layer: 0
+  m_Name: dialogo_intro
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &332396401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332396400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 928f7db4b89a5554f968e1e817eda0ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ContactSprite: {fileID: 0}
+  DialogueSlots:
+  - DialogueIndex: 0
+    DialogueDestionationIndex: 1
+    DialogueName: Opponent
+    DialogueText: A new face in this godforsaken place is even more rare than a watered-down
+      pint, huh.
+  - DialogueIndex: 1
+    DialogueDestionationIndex: 2
+    DialogueName: Opponent
+    DialogueText: "Let\u2019s hear it, pardner: Ya good with that gun? Can ya hit
+      the coins mid-air like a true champ?"
+  - DialogueIndex: 2
+    DialogueDestionationIndex: 3
+    DialogueName: Opponent
+    DialogueText: "Don\u2019t wet ya pants, it\u2019s very easy: one of us throws,
+      the other shoots. The first to reach 20\u2026"
+  - DialogueIndex: 3
+    DialogueDestionationIndex: 4
+    DialogueName: Opponent
+    DialogueText: "...Y\u2019know what? Let\u2019s see if ya can even get to 5 without
+      killing some poor bastard."
+  - DialogueIndex: 4
+    DialogueDestionationIndex: -1
+    DialogueName: Opponent
+    DialogueText: "Here, take this. If it\u2019s heads, ya shoot. If it\u2019s tails
+      ya throw. Let fate decide who starts."
+--- !u!4 &332396402
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332396400}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 84363910}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &479706079 stripped
 ParticleSystem:
@@ -591,6 +668,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2903830743748730753, guid: d1aa63290a8d3c848aede137dadff58a, type: 3}
+      propertyPath: m_text
+      value: Choose the Trajectory
+      objectReference: {fileID: 0}
     - target: {fileID: 3087270779619577110, guid: d1aa63290a8d3c848aede137dadff58a, type: 3}
       propertyPath: CoinSlot_ref.CoinDescription
       value: 1  Point if hit, 1 Trajectory
@@ -600,9 +681,13 @@ PrefabInstance:
       value: 3 Points if hit, 3 Trajectories
       objectReference: {fileID: 0}
     - target: {fileID: 5208884030484077168, guid: d1aa63290a8d3c848aede137dadff58a, type: 3}
+      propertyPath: DelayPassDialogue
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5208884030484077168, guid: d1aa63290a8d3c848aede137dadff58a, type: 3}
       propertyPath: StartDialogueInfo_ref
       value: 
-      objectReference: {fileID: 702170751}
+      objectReference: {fileID: 332396401}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -786,6 +871,106 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1482780312842057399, guid: a4d38949628723545963734905010594, type: 3}
   m_PrefabInstance: {fileID: 2433797525973500824}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1117634266
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1117634267}
+  - component: {fileID: 1117634268}
+  m_Layer: 0
+  m_Name: dialogo_testa
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1117634267
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1117634266}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 84363910}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1117634268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1117634266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 928f7db4b89a5554f968e1e817eda0ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ContactSprite: {fileID: 0}
+  DialogueSlots:
+  - DialogueIndex: 0
+    DialogueDestionationIndex: -1
+    DialogueName: Opponent
+    DialogueText: At least try to aim for the coin and not your pride, pal.
+--- !u!1 &1158588506
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1158588507}
+  - component: {fileID: 1158588508}
+  m_Layer: 0
+  m_Name: dialogo_diff_med
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1158588507
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158588506}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 84363910}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1158588508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158588506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 928f7db4b89a5554f968e1e817eda0ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ContactSprite: {fileID: 0}
+  DialogueSlots:
+  - DialogueIndex: 0
+    DialogueDestionationIndex: -1
+    DialogueName: Opponent
+    DialogueText: "The middle way is the way of the wise\u2026 or the cowards."
 --- !u!1001 &1393585540
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -886,6 +1071,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c160b93e7684e4ea1493feca44413b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1433914681
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1433914682}
+  - component: {fileID: 1433914683}
+  m_Layer: 0
+  m_Name: dialogo_diff_facile
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1433914682
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1433914681}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 84363910}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1433914683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1433914681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 928f7db4b89a5554f968e1e817eda0ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ContactSprite: {fileID: 0}
+  DialogueSlots:
+  - DialogueIndex: 0
+    DialogueDestionationIndex: -1
+    DialogueName: Opponent
+    DialogueText: "Yeah, every man should know his limits\u2026"
 --- !u!1001 &1625733154
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -898,6 +1133,46 @@ PrefabInstance:
       propertyPath: _dialogueSystem
       value: 
       objectReference: {fileID: 2791532046086464306}
+    - target: {fileID: 1160481191722581239, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
+      propertyPath: headsDialogue.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1160481191722581239, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
+      propertyPath: tailsDialogue.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1160481191722581239, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
+      propertyPath: 'headsDialogue.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1117634268}
+    - target: {fileID: 1160481191722581239, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
+      propertyPath: 'tailsDialogue.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2018858964}
+    - target: {fileID: 1160481191722581239, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
+      propertyPath: easyThrowDialogue.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1160481191722581239, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
+      propertyPath: mediumThrowDialogue.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1160481191722581239, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
+      propertyPath: 'easyThrowDialogue.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1433914683}
+    - target: {fileID: 1160481191722581239, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
+      propertyPath: difficultThrowDialogue.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1160481191722581239, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
+      propertyPath: 'mediumThrowDialogue.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1158588508}
+    - target: {fileID: 1160481191722581239, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
+      propertyPath: 'difficultThrowDialogue.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2092320399}
     - target: {fileID: 3069578678304491984, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
       propertyPath: m_Name
       value: Manager
@@ -1260,6 +1535,106 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 310d90a6cf8bc854a871bd8eaca41be1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2018858962
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2018858963}
+  - component: {fileID: 2018858964}
+  m_Layer: 0
+  m_Name: dialogo_croce
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2018858963
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2018858962}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 84363910}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2018858964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2018858962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 928f7db4b89a5554f968e1e817eda0ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ContactSprite: {fileID: 0}
+  DialogueSlots:
+  - DialogueIndex: 0
+    DialogueDestionationIndex: -1
+    DialogueName: Opponent
+    DialogueText: Tossing a coin ain't as hard as killin' a man.
+--- !u!1 &2092320397
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2092320398}
+  - component: {fileID: 2092320399}
+  m_Layer: 0
+  m_Name: dialogo_diff_difficile
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2092320398
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2092320397}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 84363910}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2092320399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2092320397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 928f7db4b89a5554f968e1e817eda0ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ContactSprite: {fileID: 0}
+  DialogueSlots:
+  - DialogueIndex: 0
+    DialogueDestionationIndex: -1
+    DialogueName: Opponent
+    DialogueText: "Fortune helps the bold\u2026 not the fools."
 --- !u!1001 &252937140775736618
 PrefabInstance:
   m_ObjectHideFlags: 0
