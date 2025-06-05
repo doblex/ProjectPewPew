@@ -27,6 +27,15 @@ public class OnShootingBehaviuor : StateMachineBehaviour
         if (timer >= shootingTime && !effectPlayed)
         {
             animationController.Effect.Play();
+            if (animationController.IsHit)
+            { 
+                AudioManager.Instance.PlayHitSound();
+            }
+            else
+            {
+                AudioManager.Instance.PlayMissSound();
+            }
+
             effectPlayed = true;
         }
 

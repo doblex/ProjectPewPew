@@ -46,18 +46,24 @@ public class AI : PG
 
     public void AddShootEvent(TrajectoryManager trajectoryManager)
     {
-        trajectoryManager.onAIShoot += Shoot;
+        trajectoryManager.onAIShoot += OnShoot;
     }
 
     public void RemoveShootEvent(TrajectoryManager trajectoryManager) 
     {
-        trajectoryManager.onAIShoot -= Shoot;
+        trajectoryManager.onAIShoot -= OnShoot;
+    }
+
+    public void OnShoot(bool isHit) 
+    {
+        GetComponent<AnimationController>().IsHit = isHit;
+        Shoot();
     }
 
     public override void Shoot()
     {
-        base.Shoot();
         animator.SetTrigger("trShoot");
+        base.Shoot();
     }
 
     protected override void CheckForShoot()

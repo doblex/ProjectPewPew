@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class CursorManager : MonoBehaviour
 {
@@ -6,6 +7,6 @@ public class CursorManager : MonoBehaviour
     private void Awake()
     {
         if(defaultCursor != null)
-            Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
+            Cursor.SetCursor(defaultCursor,new Vector2(defaultCursor.width / 2, defaultCursor.height / 2), CursorMode.Auto);
     }
 }

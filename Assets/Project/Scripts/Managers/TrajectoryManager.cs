@@ -4,7 +4,7 @@ using UnityEngine;
 public class TrajectoryManager : MonoBehaviour
 {
     public delegate void OnThrowEnded(bool hit);
-    public delegate void OnAIShoot();
+    public delegate void OnAIShoot(bool hit);
 
     public OnThrowEnded onThrowEnded;
     public OnAIShoot onAIShoot;
@@ -12,12 +12,6 @@ public class TrajectoryManager : MonoBehaviour
     public static TrajectoryManager Instance;
 
     [SerializeField] float duration = 2.0f;
-    [Header("Sounds")]
-    [SerializeField] AudioClip throwSound;
-    [SerializeField] AudioClip hitSound;
-    [SerializeField] AudioClip missSound;
-
-    AudioSource audioSource;
 
     PG currentShootingPlayer;
     Coin currentCoinTrowed;
@@ -36,8 +30,6 @@ public class TrajectoryManager : MonoBehaviour
         {
             Instance = this;
         }
-
-        audioSource = GetComponent<AudioSource>();
     }
 
     public void SpawnCoin(PG shootingPlayer, PG throwingPlayer, Trajectory trajectory, Coin coin)
@@ -61,7 +53,7 @@ public class TrajectoryManager : MonoBehaviour
     {
         p.onPlayerThrow -= OnThrow;
         p.CanTrow = false;
-        audioSource.PlayOneShot(throwSound);
+        AudioManager.Instance.PlayThrowSound();
         StartCoroutine(MoveOnTrajectory(trajectory.Spline));
         TurnManager.Instance.TurnPhase = TurnPhase.ActiveQuickTimeEvent;
     }
@@ -69,15 +61,18 @@ public class TrajectoryManager : MonoBehaviour
     void OnShoot(PG p)
     {
         p.onPlayerShoot -= OnShoot;
-        if (isShining)
+        if (p.playerType == PlayerType.PLAYER)
         {
-            audioSource.PlayOneShot(hitSound);
-            currentCoinTrowed.Hit();
-            isHit = true;
-        }
-        else
-        { 
-            audioSource.PlayOneShot(missSound);
+            if (isShining)
+            {
+                AudioManager.Instance.PlayHitSound();
+                currentCoinTrowed.Hit();
+                isHit = true;
+            }
+            else
+            {
+                AudioManager.Instance.PlayMissSound();
+            }
         }
 
         p.CanShoot = false;
@@ -122,12 +117,14 @@ public class TrajectoryManager : MonoBehaviour
             if (currentShootingPlayer.playerType == PlayerType.AI)
             {
                 int rnd = Random.Range(1, 101);
+                bool isHit = false;
                 //Debug.Log("AI Shooting Outcome " + rnd.ToString() + "/" + currentCoinTrowed.AIHitProbability);
                 if (rnd <= currentCoinTrowed.AIHitProbability)
-                { 
-                    onAIShoot?.Invoke();
-                    //Debug.Log("AI Shooted");
+                {
+                    isHit = true;
                 }
+
+                onAIShoot?.Invoke(isHit);
             }
         }
 

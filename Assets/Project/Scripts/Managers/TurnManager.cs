@@ -131,6 +131,7 @@ public class TurnManager : MonoBehaviour
             currentActivePlayer = Random.Range(0, players.Length);
             isPlayerFirst = players[currentActivePlayer].playerType == PlayerType.PLAYER;
             HUD.Instance.ShowCoinFace(isPlayerFirst);
+            onTurnEnd?.Invoke(players[currentActivePlayer].playerType);
         });
     }
 

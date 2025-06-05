@@ -11,8 +11,11 @@ public class AnimationController : MonoBehaviour
     [SerializeField] GameObject weapon;
     [SerializeField] ParticleSystem effect;
 
+    bool isHit = false;
+
     public GameObject Weapon { get => weapon; }
     public ParticleSystem Effect { get => effect; }
+    public bool IsHit { get => isHit; set => isHit = value; }
 
     public void Throw()
     {

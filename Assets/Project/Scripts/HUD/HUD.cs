@@ -37,6 +37,9 @@ public class HUD : MonoBehaviour
     [SerializeField] GameObject IconsPanel_ref;
     [SerializeField] GameObject ShootPanel_ref;
     [SerializeField] GameObject ThrowPanel_ref;
+    [SerializeField] GameObject GoldCoinPanel_ref;
+    [SerializeField] GameObject SilverCoinPanel_ref;
+    [SerializeField] GameObject BronzeCoinPanel_ref;
     [SerializeField] GameObject ConfirmPanel_ref;
     [SerializeField] GameObject CoinFacesPanel_ref;
     [SerializeField] GameObject HeadsPanel_ref;
@@ -50,7 +53,7 @@ public class HUD : MonoBehaviour
     [SerializeField] Toggle Skill2Toggle_ref;
     [SerializeField] Button SkillCofirmButton_ref;
     Item[] AvailableItems;
-    int ActualUsedItemIndex;
+    int ActualUsedItemIndex = -1;
     bool b_IsSkillConfirmButtonHide = true;
 
     [SerializeField, Header("Setup Trajectories"), Space(10f)] GameObject TrajectoriesPanel_ref;
@@ -211,6 +214,24 @@ public class HUD : MonoBehaviour
     public void ChooseCoin(int coinType)
     {
         ChoosenCoin = (CoinType)coinType;
+
+        GoldCoinPanel_ref.SetActive(false);
+        SilverCoinPanel_ref.SetActive(false);
+        BronzeCoinPanel_ref.SetActive(false);
+
+        switch ((CoinType)coinType)
+        {
+            case CoinType.EASY:
+                BronzeCoinPanel_ref.SetActive(true);
+                break;
+            case CoinType.MEDIUM:
+                SilverCoinPanel_ref.SetActive(true);
+                break;
+            case CoinType.HARD:
+                GoldCoinPanel_ref.SetActive(true);
+                break;
+        }
+
         CoinDifficultyPanel_ref.SetActive(false);
         onChooseCoin?.Invoke(coinType);
     }
@@ -284,7 +305,6 @@ public class HUD : MonoBehaviour
             ThreeTrajectoriesPanel_ref.SetActive(false);
         }
         TrajectoriesPanel_ref.SetActive(false);
-        DisableSkills();
     }
 
     public void ConfirmTrajectory() 
@@ -302,21 +322,22 @@ public class HUD : MonoBehaviour
             trajectoryIndex = (int)SelectorToggle_ref.trajectoryType;
             if (ActualUsedItemIndex == 0)
             {
-                Debug.LogError("E'stato scelto l'oggetto 0");
+                Debug.LogWarning("E'stato scelto l'oggetto 0");
                 itemIndex = 0;
-                ActualUsedItemIndex = -1;
+                
             }
             else if(ActualUsedItemIndex == 1)
             {
-                Debug.LogError("E'stato scelto l'oggetto 1");
+                Debug.LogWarning("E'stato scelto l'oggetto 1");
                 itemIndex = 1;
-                ActualUsedItemIndex = -1;
             }
             else
             {
-                Debug.LogError("Non è stato scelto alcun oggetto");
+                Debug.LogWarning("Non è stato scelto alcun oggetto");
                 itemIndex = -1;
             }
+
+            ActualUsedItemIndex = -1;
         }
 
         EnableTrajectories();
@@ -425,19 +446,18 @@ public class HUD : MonoBehaviour
     private void EnableSkills()
     {
         AvailableItems = TurnManager.Instance.ItemManager.GetAllItems();
-        if (!AvailableItems[0].isUsed && isThrowing)
+
+        Skill1Toggle_ref.interactable = false;
+        Skill2Toggle_ref.interactable = false;
+
+        if (!AvailableItems[0].isUsed && !isThrowing)
         {
             Skill1Toggle_ref.interactable = true;
         }
-        else if (!AvailableItems[1].isUsed && !isThrowing)
+        else if (!AvailableItems[1].isUsed && isThrowing)
         {
             Skill2Toggle_ref.interactable = true;
         }
-    }
-    private void DisableSkills()
-    {
-        Skill1Toggle_ref.interactable = false;
-        Skill2Toggle_ref.interactable = false;
     }
 
     //public void ToggleSkillConfimButton()
