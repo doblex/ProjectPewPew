@@ -101,7 +101,6 @@ public class TurnManager : MonoBehaviour
                     () =>
                     {
                         SetCoin(players[currentActivePlayer].ChooseCoinDifficulty(throwableCoins));
-                        PrepareThrow();
                     }));
                 });
             }
@@ -156,9 +155,7 @@ public class TurnManager : MonoBehaviour
 
     public void OnSetCoin(int index)
     {
-
         SetCoin(index);
-        PrepareThrow();
     }
 
     public void NextPlayer()
@@ -211,10 +208,20 @@ public class TurnManager : MonoBehaviour
                 break;
         }
 
-        DialogueManager.Instance.StartDialogue(dialogueType, () =>
+        if (players[currentActivePlayer].playerType == PlayerType.PLAYER)
+        {
+            DialogueManager.Instance.StartDialogue(dialogueType, () =>
+            {
+                currentSelectedCoin = index;
+                PrepareThrow();
+            });
+        }
+        else
         {
             currentSelectedCoin = index;
-        });
+            PrepareThrow();
+        }
+        
         
     }
 
@@ -338,8 +345,7 @@ public class TurnManager : MonoBehaviour
                 int pointsToAward = doublePoints ? throwableCoins[currentSelectedCoin].Points * 2 : throwableCoins[currentSelectedCoin].Points;
                 doublePoints = false;
 
-                if (hit)
-                    players[currentActivePlayer].AwardPoints(pointsToAward);
+                players[currentActivePlayer].AwardPoints(pointsToAward);
 
                 CheckForWinCondition();
 
@@ -351,12 +357,6 @@ public class TurnManager : MonoBehaviour
             DialogueManager.Instance.StartDialogue(DialogueType.succesShootDialogue, () =>
             {
                 TurnPhase = TurnPhase.ActivePointAssign;
-
-                int pointsToAward = doublePoints ? throwableCoins[currentSelectedCoin].Points * 2 : throwableCoins[currentSelectedCoin].Points;
-                doublePoints = false;
-
-                if (hit)
-                    players[currentActivePlayer].AwardPoints(pointsToAward);
 
                 CheckForWinCondition();
 

@@ -317,6 +317,9 @@ public class HUD : MonoBehaviour
         int trajectoryIndex = 0;
         int itemIndex = -1;
 
+        Skill1Toggle_ref.interactable = false;
+        Skill2Toggle_ref.interactable = false;
+
         if (isSelected)
         {
             trajectoryIndex = (int)SelectorToggle_ref.trajectoryType;

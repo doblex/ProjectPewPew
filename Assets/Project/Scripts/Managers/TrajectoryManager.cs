@@ -61,18 +61,19 @@ public class TrajectoryManager : MonoBehaviour
     void OnShoot(PG p)
     {
         p.onPlayerShoot -= OnShoot;
-        if (p.playerType == PlayerType.PLAYER)
+
+        if (isShining)
         {
-            if (isShining)
+            if (p.playerType == PlayerType.PLAYER)
             {
                 AudioManager.Instance.PlayHitSound();
                 currentCoinTrowed.Hit();
                 isHit = true;
             }
-            else
-            {
-                AudioManager.Instance.PlayMissSound();
-            }
+        }
+        else if (p.playerType == PlayerType.PLAYER)
+        {
+            AudioManager.Instance.PlayMissSound();
         }
 
         p.CanShoot = false;
@@ -117,14 +118,20 @@ public class TrajectoryManager : MonoBehaviour
             if (currentShootingPlayer.playerType == PlayerType.AI)
             {
                 int rnd = Random.Range(1, 101);
-                bool isHit = false;
-                //Debug.Log("AI Shooting Outcome " + rnd.ToString() + "/" + currentCoinTrowed.AIHitProbability);
+                bool aiHit = false;
+                Debug.Log("AI Shooting Outcome " + rnd.ToString() + "/" + currentCoinTrowed.AIHitProbability);
+
                 if (rnd <= currentCoinTrowed.AIHitProbability)
                 {
+                    aiHit = true;
                     isHit = true;
                 }
+                else
+                {
+                    isHit = false;
+                }
 
-                onAIShoot?.Invoke(isHit);
+                onAIShoot?.Invoke(aiHit);
             }
         }
 
