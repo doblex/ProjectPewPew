@@ -38,6 +38,8 @@ public class TurnManager : MonoBehaviour
 
     bool doublePoints;
     bool isThrowing = false;
+    bool isGameEnded = true;
+
     Trajectory[] validTrajectories;
 
     private int NextPlayerIndex => (currentActivePlayer + 1) % players.Length;
@@ -66,6 +68,10 @@ public class TurnManager : MonoBehaviour
             dummyPlayer.onChooseCoinTrajectoryEnded += OnSetThrowingTrajectory;
             dummyPlayer.onChooseShootingTrajectoryEnded += OnSetShootingTrajectory;
         }
+
+        int currentActivePlayer = -1;
+        int currentSelectedCoin = -1;
+        isGameEnded = false;
 
         HUD.Instance.onStartGame += OnStartGame;
         HUD.Instance.onChooseCoin += OnSetCoin;
@@ -349,7 +355,8 @@ public class TurnManager : MonoBehaviour
 
                 CheckForWinCondition();
 
-                NextPlayer();
+                if (!isGameEnded)
+                    NextPlayer();
             }
             else
             {
@@ -364,7 +371,8 @@ public class TurnManager : MonoBehaviour
 
                     CheckForWinCondition();
 
-                    NextPlayer();
+                    if (!isGameEnded)
+                        NextPlayer();
                 });
             }
         }
@@ -376,7 +384,8 @@ public class TurnManager : MonoBehaviour
 
                 CheckForWinCondition();
 
-                NextPlayer();
+                if (!isGameEnded)
+                    NextPlayer();
             }
             else
             {
@@ -386,7 +395,8 @@ public class TurnManager : MonoBehaviour
 
                     CheckForWinCondition();
 
-                    NextPlayer();
+                    if(!isGameEnded)
+                        NextPlayer();
                 });
             }
         }
@@ -397,6 +407,7 @@ public class TurnManager : MonoBehaviour
         TurnPhase = TurnPhase.VictoryChecks;
         if (players[currentActivePlayer].Points >= pointsCap)
         {
+            isGameEnded = true;
             if (players[currentActivePlayer].playerType == PlayerType.PLAYER)
             {
                 DialogueManager.Instance.StartDialogue(DialogueType.playerWinDialogue, () =>

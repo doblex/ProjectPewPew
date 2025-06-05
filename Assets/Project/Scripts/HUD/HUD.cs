@@ -325,18 +325,15 @@ public class HUD : MonoBehaviour
             trajectoryIndex = (int)SelectorToggle_ref.trajectoryType;
             if (ActualUsedItemIndex == 0)
             {
-                Debug.LogWarning("E'stato scelto l'oggetto 0");
                 itemIndex = 0;
                 
             }
             else if(ActualUsedItemIndex == 1)
             {
-                Debug.LogWarning("E'stato scelto l'oggetto 1");
                 itemIndex = 1;
             }
             else
             {
-                Debug.LogWarning("Non è stato scelto alcun oggetto");
                 itemIndex = -1;
             }
 

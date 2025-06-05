@@ -1459,6 +1459,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 376712919579373730, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 376712919579373730, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
+      propertyPath: m_Volume
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 376712919579373730, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: 280757a3b3aa56b4abcd1b1c910e6485, type: 3}
+    - target: {fileID: 376712919579373730, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 280757a3b3aa56b4abcd1b1c910e6485, type: 3}
+    - target: {fileID: 376712919579373730, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: 9bd44c340258edf409f572d15d3a3078, type: 2}
+    - target: {fileID: 519460739934083945, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: b5ecc6c928a480244a9532c6df13e91a, type: 2}
     - target: {fileID: 1160481191722581239, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
       propertyPath: _dialogueSystem
       value: 
@@ -1594,6 +1618,14 @@ PrefabInstance:
     - target: {fileID: 6360593012434679583, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9063137086632411969, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
+      propertyPath: debugMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9063137086632411969, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
+      propertyPath: pointsCap
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9063137086632411969, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
       propertyPath: coinFlipAnimation
@@ -1741,7 +1773,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2771858317341925210, guid: 68fe1dca6b249d74493f247da3d2a836, type: 3}
       propertyPath: points
-      value: 0
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2771858317341925210, guid: 68fe1dca6b249d74493f247da3d2a836, type: 3}
       propertyPath: ParticleSystem
