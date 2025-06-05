@@ -16,8 +16,8 @@ public class TurnManager : MonoBehaviour
     [SerializeField] bool debugMode = false;
 
     public delegate void OnPlayerChooseCoin();
-    public delegate void OnPlayerChooseCoinTrajectory(int trajectoriesCount, Item[] item);
-    public delegate void OnPlayerChooseEnemyTrajectory(int trajectoriesCount, Item[] item);
+    public delegate void OnPlayerChooseCoinTrajectory(int trajectoriesCount);
+    public delegate void OnPlayerChooseEnemyTrajectory(int trajectoriesCount);
     public delegate void OnTurnEnd(PlayerType playerType);
 
     public OnPlayerChooseCoin onPlayerChooseCoin;
@@ -43,6 +43,7 @@ public class TurnManager : MonoBehaviour
     private int NextPlayerIndex => (currentActivePlayer + 1) % players.Length;
 
     public PG[] Players  { get => players; }
+    public ItemManager ItemManager { get => itemManager;}
 
     private void Awake()
     {
@@ -253,7 +254,7 @@ public class TurnManager : MonoBehaviour
 
         if (players[NextPlayerIndex].playerType == PlayerType.PLAYER)
         { 
-            onPlayerChooseCoinTrajectory?.Invoke(validTrajectories.Length, itemManager.GetAllItems()); //TODO Collegare Parte Grafica
+            onPlayerChooseCoinTrajectory?.Invoke(validTrajectories.Length); //TODO Collegare Parte Grafica
         }
         else
         {
@@ -286,7 +287,7 @@ public class TurnManager : MonoBehaviour
 
         if (players[currentActivePlayer].playerType == PlayerType.PLAYER)
         {
-            onPlayerChooseEnemyTrajectory?.Invoke(validTrajectories.Length, itemManager.GetAllItems()); //TODO Collegare Parte Grafica
+            onPlayerChooseEnemyTrajectory?.Invoke(validTrajectories.Length); //TODO Collegare Parte Grafica
         }
         else 
         {

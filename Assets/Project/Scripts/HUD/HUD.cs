@@ -215,20 +215,20 @@ public class HUD : MonoBehaviour
         onChooseCoin?.Invoke(coinType);
     }
 
-    public void OpenTrajectoriesPanelForThrowing(int TrajectoriesQuantity, Item[] items) 
+    public void OpenTrajectoriesPanelForThrowing(int TrajectoriesQuantity) 
     {
         isThrowing = true;
-        OnOpenTrajectoriesPanel(TrajectoriesQuantity, items);
+        OnOpenTrajectoriesPanel(TrajectoriesQuantity);
     }
-    public void OpenTrajectoriesPanelForShooting(int TrajectoriesQuantity, Item[] items) 
+    public void OpenTrajectoriesPanelForShooting(int TrajectoriesQuantity) 
     {
         isThrowing = false;
-        OnOpenTrajectoriesPanel(TrajectoriesQuantity, items);
+        OnOpenTrajectoriesPanel(TrajectoriesQuantity);
     }
 
-    private void OnOpenTrajectoriesPanel(int TrajectoriesQuantity, Item[] items)
+    private void OnOpenTrajectoriesPanel(int TrajectoriesQuantity)
     {
-        EnableSkills(items);
+        EnableSkills();
         if (TrajectoriesQuantity < MinNumberOfTrajectories || TrajectoriesQuantity > MaxNumberOfTrajectories)
         {
             Debug.LogError("Quantità traiettorie invalida");
@@ -422,15 +422,14 @@ public class HUD : MonoBehaviour
         action?.Invoke();
     }
 
-    private void EnableSkills(Item[] Items)
+    private void EnableSkills()
     {
-        AvailableItems = Items;
+        AvailableItems = TurnManager.Instance.ItemManager.GetAllItems();
         if (!AvailableItems[0].isUsed && isThrowing)
         {
             Skill1Toggle_ref.interactable = true;
         }
-
-        if (!AvailableItems[1].isUsed && !isThrowing)
+        else if (!AvailableItems[1].isUsed && !isThrowing)
         {
             Skill2Toggle_ref.interactable = true;
         }
@@ -441,41 +440,42 @@ public class HUD : MonoBehaviour
         Skill2Toggle_ref.interactable = false;
     }
 
-    public void ToggleSkillConfimButton()
-    {
-        if (b_IsSkillConfirmButtonHide)
-        {
-            if (Skill1Toggle_ref.isOn || Skill2Toggle_ref.isOn)
-            {
-                SkillCofirmButton_ref.gameObject.SetActive(true);
-                b_IsSkillConfirmButtonHide = false;
-            }
-        }
-        else
-        {
-            if (Skill1Toggle_ref.isOn && Skill2Toggle_ref.isOn)
-            {
-                SkillCofirmButton_ref.gameObject.SetActive(false);
-                b_IsSkillConfirmButtonHide = true;
-            }
-        }
-    }
+    //public void ToggleSkillConfimButton()
+    //{
+    //    if (b_IsSkillConfirmButtonHide)
+    //    {
+    //        if (Skill1Toggle_ref.isOn || Skill2Toggle_ref.isOn)
+    //        {
+    //            SkillCofirmButton_ref.gameObject.SetActive(true);
+    //            b_IsSkillConfirmButtonHide = false;
+    //        }
+    //    }
+    //    else
+    //    {
+    //        if (Skill1Toggle_ref.isOn && Skill2Toggle_ref.isOn)
+    //        {
+    //            SkillCofirmButton_ref.gameObject.SetActive(false);
+    //            b_IsSkillConfirmButtonHide = true;
+    //        }
+    //    }
+    //}
 
     public void ConfirmSkill()
     {
-
         if (Skill1Toggle_ref.isOn)
         {
             AvailableItems[0].isUsed = true;
+            Skill1Toggle_ref.isOn = false;
+            Skill1Toggle_ref.interactable = false;
             ActualUsedItemIndex = 0;
         }
         if (Skill2Toggle_ref.isOn)
         {
             AvailableItems[1].isUsed = true;
+            Skill2Toggle_ref.isOn = false;
+            Skill2Toggle_ref.interactable = false;
             ActualUsedItemIndex = 1;
         }
-        SkillCofirmButton_ref.gameObject.SetActive(false);
-        b_IsSkillConfirmButtonHide = true;
     }
 
     public void ShowCommand(CommandType commandType = CommandType.none)
