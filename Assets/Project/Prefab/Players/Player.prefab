@@ -47,10 +47,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   _splineVisualization: {fileID: 5488733426284756599}
-  _startPoint: {x: 0, y: 0, z: 0}
+  _startPoint: {x: 0, y: -0.5, z: 0}
   _endPoint: {x: 0, y: -1, z: 3}
   _heightOffset: 1.5
-  _placementOffset: 0.75
+  _placementOffset: 0.5
 --- !u!1 &551179290415766032
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,10 +202,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   _splineVisualization: {fileID: 8364510831605452006}
-  _startPoint: {x: 0, y: 0, z: 0}
+  _startPoint: {x: 0, y: -0.5, z: 0}
   _endPoint: {x: 1, y: -1, z: 3}
   _heightOffset: 1.5
-  _placementOffset: 0.75
+  _placementOffset: 0.5
 --- !u!1 &2058147881559862451
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,7 +231,7 @@ Transform:
   m_GameObject: {fileID: 2058147881559862451}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.39906466, y: 0.74423647, z: 2.120856}
+  m_LocalPosition: {x: 0.27406472, y: 0.7442365, z: 1.3708562}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -320,8 +320,9 @@ MonoBehaviour:
   - {fileID: 7425431798257998886}
   - {fileID: 5059225066667627254}
   points: 0
-  ThrowKey: 101
-  ShootKey: 32
+  ThrowKey: 324
+  ShootKey: 323
+  ParticleSystem: {fileID: 0}
 --- !u!1 &3413630619637027001
 GameObject:
   m_ObjectHideFlags: 0
@@ -515,7 +516,7 @@ Transform:
   m_GameObject: {fileID: 3730554231176413479}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.000000040978193, y: -0.49999997, z: -0.000000033527613}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -620,10 +621,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   _splineVisualization: {fileID: 2711682340888709980}
-  _startPoint: {x: 0, y: 0, z: 0}
+  _startPoint: {x: 0, y: -0.5, z: 0}
   _endPoint: {x: 0.5, y: -1, z: 3}
   _heightOffset: 1.5
-  _placementOffset: 0.75
+  _placementOffset: 0.5
 --- !u!1 &5814173931356128801
 GameObject:
   m_ObjectHideFlags: 0
@@ -649,7 +650,7 @@ Transform:
   m_GameObject: {fileID: 5814173931356128801}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.02406466, y: 0.74423647, z: 2.120856}
+  m_LocalPosition: {x: 0.024064839, y: 0.7442365, z: 1.3708562}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -680,7 +681,7 @@ Transform:
   m_GameObject: {fileID: 6414794946977550193}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.000000040978193, y: -0.49999997, z: -0.000000033527613}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -711,7 +712,7 @@ Transform:
   m_GameObject: {fileID: 6675873759357363504}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.000000040978193, y: -0.49999997, z: -0.000000033527613}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -742,7 +743,7 @@ Transform:
   m_GameObject: {fileID: 6912058775921156854}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.7740648, y: 0.74423647, z: 2.1208563}
+  m_LocalPosition: {x: 0.5240648, y: 0.7442366, z: 1.370856}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
