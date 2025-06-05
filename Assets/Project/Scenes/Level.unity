@@ -155,6 +155,8 @@ Transform:
   - {fileID: 1433914682}
   - {fileID: 1158588507}
   - {fileID: 2092320398}
+  - {fileID: 2066857117}
+  - {fileID: 1897152498}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &332396400
@@ -1151,10 +1153,18 @@ PrefabInstance:
       objectReference: {fileID: 2018858964}
     - target: {fileID: 1160481191722581239, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
       propertyPath: easyThrowDialogue.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1160481191722581239, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
+      propertyPath: failedShootDialogue.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1160481191722581239, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
       propertyPath: mediumThrowDialogue.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1160481191722581239, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
+      propertyPath: succesShootDialogue.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1160481191722581239, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
@@ -1163,12 +1173,20 @@ PrefabInstance:
       objectReference: {fileID: 1433914683}
     - target: {fileID: 1160481191722581239, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
       propertyPath: difficultThrowDialogue.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1160481191722581239, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
+      propertyPath: 'failedShootDialogue.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2066857118}
     - target: {fileID: 1160481191722581239, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
       propertyPath: 'mediumThrowDialogue.Array.data[0]'
       value: 
       objectReference: {fileID: 1158588508}
+    - target: {fileID: 1160481191722581239, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
+      propertyPath: 'succesShootDialogue.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1897152499}
     - target: {fileID: 1160481191722581239, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
       propertyPath: 'difficultThrowDialogue.Array.data[0]'
       value: 
@@ -1291,6 +1309,56 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1f28dba050e5b24489404e7cafd63e5, type: 3}
+--- !u!1 &1897152497
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1897152498}
+  - component: {fileID: 1897152499}
+  m_Layer: 0
+  m_Name: dialogo_moneta_hit
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1897152498
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1897152497}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 84363910}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1897152499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1897152497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 928f7db4b89a5554f968e1e817eda0ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ContactSprite: {fileID: 0}
+  DialogueSlots:
+  - DialogueIndex: 0
+    DialogueDestionationIndex: -1
+    DialogueName: Opponent
+    DialogueText: Workin' really hard, are we?
 --- !u!1001 &1959143770
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1585,6 +1653,56 @@ MonoBehaviour:
     DialogueDestionationIndex: -1
     DialogueName: Opponent
     DialogueText: Tossing a coin ain't as hard as killin' a man.
+--- !u!1 &2066857116
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2066857117}
+  - component: {fileID: 2066857118}
+  m_Layer: 0
+  m_Name: dialogo_moneta_miss
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2066857117
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2066857116}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 84363910}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2066857118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2066857116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 928f7db4b89a5554f968e1e817eda0ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ContactSprite: {fileID: 0}
+  DialogueSlots:
+  - DialogueIndex: 0
+    DialogueDestionationIndex: -1
+    DialogueName: Opponent
+    DialogueText: A Cowboy with a bad aim is just a man with a bad taste in hats.
 --- !u!1 &2092320397
 GameObject:
   m_ObjectHideFlags: 0
