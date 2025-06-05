@@ -67,7 +67,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Sheen_Speed: 0.8
-    - _Sheen_intensity: 0.5
+    - _Sheen_intensity: 10
     m_Colors: []
   m_BuildTextureStacks: []
   m_AllowLocking: 1

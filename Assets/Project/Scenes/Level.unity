@@ -503,6 +503,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7951788265282429, guid: d1aa63290a8d3c848aede137dadff58a, type: 3}
+      propertyPath: CoinSlot_ref.CoinDescription
+      value: 2 Ponints if hit, 2 Trajectories
+      objectReference: {fileID: 0}
     - target: {fileID: 639068360132525273, guid: d1aa63290a8d3c848aede137dadff58a, type: 3}
       propertyPath: m_Name
       value: HUD
@@ -586,6 +590,14 @@ PrefabInstance:
     - target: {fileID: 812629278224919584, guid: d1aa63290a8d3c848aede137dadff58a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3087270779619577110, guid: d1aa63290a8d3c848aede137dadff58a, type: 3}
+      propertyPath: CoinSlot_ref.CoinDescription
+      value: 1  Point if hit, 1 Trajectory
+      objectReference: {fileID: 0}
+    - target: {fileID: 4451169871783852373, guid: d1aa63290a8d3c848aede137dadff58a, type: 3}
+      propertyPath: CoinSlot_ref.CoinDescription
+      value: 3 Points if hit, 3 Trajectories
       objectReference: {fileID: 0}
     - target: {fileID: 5208884030484077168, guid: d1aa63290a8d3c848aede137dadff58a, type: 3}
       propertyPath: StartDialogueInfo_ref
@@ -1086,19 +1098,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5059225066667627254, guid: 68fe1dca6b249d74493f247da3d2a836, type: 3}
       propertyPath: _placementOffset
-      value: 0.263
+      value: 0.397
       objectReference: {fileID: 0}
     - target: {fileID: 5692603279884994214, guid: 68fe1dca6b249d74493f247da3d2a836, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.0820646
+      value: 0.06706464
       objectReference: {fileID: 0}
     - target: {fileID: 5692603279884994214, guid: 68fe1dca6b249d74493f247da3d2a836, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.9746365
+      value: 0.97388655
       objectReference: {fileID: 0}
     - target: {fileID: 5692603279884994214, guid: 68fe1dca6b249d74493f247da3d2a836, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.77245605
+      value: 0.80695605
       objectReference: {fileID: 0}
     - target: {fileID: 6433254725336572642, guid: 68fe1dca6b249d74493f247da3d2a836, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1182,7 +1194,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7425431798257998886, guid: 68fe1dca6b249d74493f247da3d2a836, type: 3}
       propertyPath: _placementOffset
-      value: 0.392
+      value: 0.407
       objectReference: {fileID: 0}
     - target: {fileID: 7610813449776484950, guid: 68fe1dca6b249d74493f247da3d2a836, type: 3}
       propertyPath: _endPoint.x
@@ -1222,15 +1234,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8814915919224314151, guid: 68fe1dca6b249d74493f247da3d2a836, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.095344484
+      value: -0.09761545
       objectReference: {fileID: 0}
     - target: {fileID: 8814915919224314151, guid: 68fe1dca6b249d74493f247da3d2a836, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.9547864
+      value: 0.93468654
       objectReference: {fileID: 0}
     - target: {fileID: 8814915919224314151, guid: 68fe1dca6b249d74493f247da3d2a836, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.3547761
+      value: 0.60133624
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
