@@ -338,7 +338,7 @@ public class TurnManager : MonoBehaviour
 
         if (hit)
         {
-            DialogueManager.Instance.StartDialogue(DialogueType.failedShootDialogue, () =>
+            if (players[currentActivePlayer].playerType == PlayerType.AI)
             {
                 TurnPhase = TurnPhase.ActivePointAssign;
 
@@ -350,18 +350,45 @@ public class TurnManager : MonoBehaviour
                 CheckForWinCondition();
 
                 NextPlayer();
-            });
+            }
+            else
+            {
+                DialogueManager.Instance.StartDialogue(DialogueType.succesShootDialogue, () =>
+                {
+                    TurnPhase = TurnPhase.ActivePointAssign;
+
+                    int pointsToAward = doublePoints ? throwableCoins[currentSelectedCoin].Points * 2 : throwableCoins[currentSelectedCoin].Points;
+                    doublePoints = false;
+
+                    players[currentActivePlayer].AwardPoints(pointsToAward);
+
+                    CheckForWinCondition();
+
+                    NextPlayer();
+                });
+            }
         }
         else
         {
-            DialogueManager.Instance.StartDialogue(DialogueType.succesShootDialogue, () =>
+            if (players[currentActivePlayer].playerType == PlayerType.AI)
             {
                 TurnPhase = TurnPhase.ActivePointAssign;
 
                 CheckForWinCondition();
 
                 NextPlayer();
-            });
+            }
+            else
+            {
+                DialogueManager.Instance.StartDialogue(DialogueType.failedShootDialogue, () =>
+                {
+                    TurnPhase = TurnPhase.ActivePointAssign;
+
+                    CheckForWinCondition();
+
+                    NextPlayer();
+                });
+            }
         }
     }
 
