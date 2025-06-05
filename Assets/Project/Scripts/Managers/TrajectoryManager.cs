@@ -129,8 +129,6 @@ public class TrajectoryManager : MonoBehaviour
                     //Debug.Log("AI Shooted");
                 }
             }
-
-
         }
 
         if (amount >= currentCoinTrowed.ShineEnd && isShining)
