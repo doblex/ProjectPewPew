@@ -53,7 +53,7 @@ MonoBehaviour:
   shiningEffect: {fileID: 8575403245015038769}
   skinnedMesh: {fileID: 8585670599843838791}
   multiplier: 1.5
-  launchDelay: 1
+  launchDelay: 2
   aIHitProbability: 50
 --- !u!1 &8575403245015038769
 GameObject:

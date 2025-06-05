@@ -132,14 +132,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  points: 1
+  points: 2
   shineStart: 0
   duration: 0.5
   isOxydated: 0
   shiningEffect: {fileID: 5173109244127249284}
   skinnedMesh: {fileID: 6038277996625979964}
   multiplier: 1.5
-  launchDelay: 1
+  launchDelay: 1.5
   aIHitProbability: 40
 --- !u!1001 &1855962555802612270
 PrefabInstance:

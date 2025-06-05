@@ -157,8 +157,63 @@ Transform:
   - {fileID: 2092320398}
   - {fileID: 2066857117}
   - {fileID: 1897152498}
+  - {fileID: 1295998053}
+  - {fileID: 2037499448}
+  - {fileID: 786160123}
+  - {fileID: 326721693}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &326721692
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 326721693}
+  - component: {fileID: 326721694}
+  m_Layer: 0
+  m_Name: dialogo_enemy_endturn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &326721693
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326721692}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 84363910}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &326721694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326721692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 928f7db4b89a5554f968e1e817eda0ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ContactSprite: {fileID: 0}
+  DialogueSlots:
+  - DialogueIndex: 0
+    DialogueDestionationIndex: -1
+    DialogueName: Opponent
+    DialogueText: "I've got plenty of lead to keep going until tomorrow, pardner.
+      Don\u2019t ask me how I got so many\u2026 ya wouldn\u2019t like the answer."
 --- !u!1 &332396400
 GameObject:
   m_ObjectHideFlags: 0
@@ -706,8 +761,20 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2401316677282988906, guid: d1aa63290a8d3c848aede137dadff58a, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2401316677282988906, guid: d1aa63290a8d3c848aede137dadff58a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 2532471937998089315, guid: d1aa63290a8d3c848aede137dadff58a, type: 3}
       propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2532471937998089315, guid: d1aa63290a8d3c848aede137dadff58a, type: 3}
+      propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2903830743748730753, guid: d1aa63290a8d3c848aede137dadff58a, type: 3}
@@ -728,7 +795,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3022572807459045126, guid: d1aa63290a8d3c848aede137dadff58a, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 157.67725
       objectReference: {fileID: 0}
     - target: {fileID: 3022572807459045126, guid: d1aa63290a8d3c848aede137dadff58a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -740,7 +807,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3022572807459045126, guid: d1aa63290a8d3c848aede137dadff58a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -78.83862
       objectReference: {fileID: 0}
     - target: {fileID: 3087270779619577110, guid: d1aa63290a8d3c848aede137dadff58a, type: 3}
       propertyPath: CoinSlot_ref.CoinDescription
@@ -762,6 +829,22 @@ PrefabInstance:
       propertyPath: StartDialogueInfo_ref
       value: 
       objectReference: {fileID: 332396401}
+    - target: {fileID: 5727413041211037493, guid: d1aa63290a8d3c848aede137dadff58a, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727413041211037493, guid: d1aa63290a8d3c848aede137dadff58a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6423468179269472731, guid: d1aa63290a8d3c848aede137dadff58a, type: 3}
+      propertyPath: m_fontSize
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 6423468179269472731, guid: d1aa63290a8d3c848aede137dadff58a, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 65
+      objectReference: {fileID: 0}
     - target: {fileID: 6435887555382332076, guid: d1aa63290a8d3c848aede137dadff58a, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -776,7 +859,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6435887555382332076, guid: d1aa63290a8d3c848aede137dadff58a, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 157.67725
       objectReference: {fileID: 0}
     - target: {fileID: 6435887555382332076, guid: d1aa63290a8d3c848aede137dadff58a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -788,7 +871,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6435887555382332076, guid: d1aa63290a8d3c848aede137dadff58a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -78.83862
       objectReference: {fileID: 0}
     - target: {fileID: 7247199453438935003, guid: d1aa63290a8d3c848aede137dadff58a, type: 3}
       propertyPath: m_AnchorMax.y
@@ -822,11 +905,70 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7641513289375716050, guid: d1aa63290a8d3c848aede137dadff58a, type: 3}
+      propertyPath: m_fontSize
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 7641513289375716050, guid: d1aa63290a8d3c848aede137dadff58a, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 65
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1aa63290a8d3c848aede137dadff58a, type: 3}
+--- !u!1 &786160122
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 786160123}
+  - component: {fileID: 786160124}
+  m_Layer: 0
+  m_Name: dialogo_enemy_difficulty
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &786160123
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 786160122}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 84363910}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &786160124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 786160122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 928f7db4b89a5554f968e1e817eda0ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ContactSprite: {fileID: 0}
+  DialogueSlots:
+  - DialogueIndex: 0
+    DialogueDestionationIndex: -1
+    DialogueName: Opponent
+    DialogueText: "They say \u2018A man with no faith in himself might as well just
+      pray to the wind for help\u2019."
 --- !u!1001 &875785452
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1105,6 +1247,56 @@ MonoBehaviour:
     DialogueDestionationIndex: -1
     DialogueName: Opponent
     DialogueText: "The middle way is the way of the wise\u2026 or the cowards."
+--- !u!1 &1295998052
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1295998053}
+  - component: {fileID: 1295998054}
+  m_Layer: 0
+  m_Name: dialogo_player_win
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1295998053
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1295998052}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 84363910}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1295998054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1295998052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 928f7db4b89a5554f968e1e817eda0ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ContactSprite: {fileID: 0}
+  DialogueSlots:
+  - DialogueIndex: 0
+    DialogueDestionationIndex: -1
+    DialogueName: Opponent
+    DialogueText: "Fine, fine. Ya won. But next time ya won\u2019t be this lucky."
 --- !u!1001 &1393585540
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1128,6 +1320,10 @@ PrefabInstance:
     - target: {fileID: 1830779297006266759, guid: 818826845f5189f47955b83cf1f3bedb, type: 3}
       propertyPath: _placementOffset
       value: 0.601
+      objectReference: {fileID: 0}
+    - target: {fileID: 2242914557446504626, guid: 818826845f5189f47955b83cf1f3bedb, type: 3}
+      propertyPath: points
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3410275443590101725, guid: 818826845f5189f47955b83cf1f3bedb, type: 3}
       propertyPath: coins
@@ -1285,7 +1481,15 @@ PrefabInstance:
       objectReference: {fileID: 2018858964}
     - target: {fileID: 1160481191722581239, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
       propertyPath: easyThrowDialogue.Array.size
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1160481191722581239, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
+      propertyPath: playerWinDialogue.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1160481191722581239, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
+      propertyPath: playerLoseDialogue.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1160481191722581239, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
       propertyPath: failedShootDialogue.Array.size
@@ -1293,10 +1497,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1160481191722581239, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
       propertyPath: mediumThrowDialogue.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1160481191722581239, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
       propertyPath: succesShootDialogue.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1160481191722581239, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
+      propertyPath: EnemyEndTurnDialogue.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1160481191722581239, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
@@ -1304,8 +1512,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1433914683}
     - target: {fileID: 1160481191722581239, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
+      propertyPath: 'playerWinDialogue.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1295998054}
+    - target: {fileID: 1160481191722581239, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
+      propertyPath: 'playerLoseDialogue.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2037499449}
+    - target: {fileID: 1160481191722581239, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
       propertyPath: difficultThrowDialogue.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1160481191722581239, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
       propertyPath: 'failedShootDialogue.Array.data[0]'
@@ -1320,9 +1536,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1897152499}
     - target: {fileID: 1160481191722581239, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
+      propertyPath: 'EnemyEndTurnDialogue.Array.data[0]'
+      value: 
+      objectReference: {fileID: 326721694}
+    - target: {fileID: 1160481191722581239, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
       propertyPath: 'difficultThrowDialogue.Array.data[0]'
       value: 
       objectReference: {fileID: 2092320399}
+    - target: {fileID: 1160481191722581239, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
+      propertyPath: EnemyDifficultySelectionDialogue.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1160481191722581239, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
+      propertyPath: 'EnemyDifficultySelectionDialogue.Array.data[0]'
+      value: 
+      objectReference: {fileID: 786160124}
     - target: {fileID: 3069578678304491984, guid: 52cea9b493b6d2a4b995616b7b0faf47, type: 3}
       propertyPath: m_Name
       value: Manager
@@ -1510,6 +1738,10 @@ PrefabInstance:
     - target: {fileID: 391403093768274045, guid: 68fe1dca6b249d74493f247da3d2a836, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.2700002
+      objectReference: {fileID: 0}
+    - target: {fileID: 2771858317341925210, guid: 68fe1dca6b249d74493f247da3d2a836, type: 3}
+      propertyPath: points
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2771858317341925210, guid: 68fe1dca6b249d74493f247da3d2a836, type: 3}
       propertyPath: ParticleSystem
@@ -1785,6 +2017,57 @@ MonoBehaviour:
     DialogueDestionationIndex: -1
     DialogueName: Opponent
     DialogueText: Tossing a coin ain't as hard as killin' a man.
+--- !u!1 &2037499447
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2037499448}
+  - component: {fileID: 2037499449}
+  m_Layer: 0
+  m_Name: dialogo_player_lose
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2037499448
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2037499447}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 84363910}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2037499449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2037499447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 928f7db4b89a5554f968e1e817eda0ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ContactSprite: {fileID: 0}
+  DialogueSlots:
+  - DialogueIndex: 0
+    DialogueDestionationIndex: -1
+    DialogueName: Opponent
+    DialogueText: "A true Winner doesn't rub their victory on other people's faces\u2026
+      Come back to me when ya want to be HUMILIATED again."
 --- !u!1 &2066857116
 GameObject:
   m_ObjectHideFlags: 0
