@@ -917,6 +917,9 @@ MonoBehaviour:
   StartMenuPanel_ref: {fileID: 352448769106601386}
   GamePanel_ref: {fileID: 1390666531055852912}
   OptionsPanel_ref: {fileID: 1267983405576675633}
+  IconsPanel_ref: {fileID: 0}
+  ShootPanel_ref: {fileID: 0}
+  ThrowPanel_ref: {fileID: 0}
   ConfirmPanel_ref: {fileID: 63148194656413881}
   CoinFacesPanel_ref: {fileID: 0}
   HeadsPanel_ref: {fileID: 0}
@@ -2824,7 +2827,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 3162671427760074574}
   toggleTransition: 1
   graphic: {fileID: 0}
@@ -2958,7 +2961,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 526320824712438738}
   toggleTransition: 1
   graphic: {fileID: 0}
@@ -8446,7 +8449,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.0019531, y: 0}
+  m_AnchoredPosition: {x: 0.001953125, y: 0}
   m_SizeDelta: {x: 0.004, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2127116817294572425
