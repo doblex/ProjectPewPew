@@ -427,21 +427,21 @@ public class TurnManager : MonoBehaviour
 
     private void OnGUI()
     {
-        if (debugMode)
-        {
-            GUIStyle coloredStyle = new GUIStyle(EditorStyles.label);
-            coloredStyle.normal.textColor = Color.black;
-            coloredStyle.fontSize = 30;
+        //if (debugMode)
+        //{
+        //    GUIStyle coloredStyle = new GUIStyle(EditorStyles.label);
+        //    coloredStyle.normal.textColor = Color.black;
+        //    coloredStyle.fontSize = 30;
 
-            EditorGUILayout.LabelField(TurnPhase.ToString(), coloredStyle);
-            EditorGUILayout.LabelField(currentActivePlayer.ToString(), coloredStyle);
+        //    EditorGUILayout.LabelField(TurnPhase.ToString(), coloredStyle);
+        //    EditorGUILayout.LabelField(currentActivePlayer.ToString(), coloredStyle);
 
 
-            //foreach (var player in players)
-            //{
-            //    EditorGUILayout.LabelField(player.playerType.ToString(),player.Points.ToString(), coloredStyle);
-            //}
-        }
+        //    //foreach (var player in players)
+        //    //{
+        //    //    EditorGUILayout.LabelField(player.playerType.ToString(),player.Points.ToString(), coloredStyle);
+        //    //}
+        //}
     }
 
     public IEnumerator Delay(float delay, Action action) 
